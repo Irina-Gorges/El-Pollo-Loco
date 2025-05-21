@@ -1,4 +1,5 @@
 class World {
+    // ########### Attributes ###########
     character = new Character();
     level = level1;
     canvas;
@@ -6,6 +7,7 @@ class World {
     keyboard;
     camera_x = 0;
 
+    // ########### Constructor ###########
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -14,6 +16,7 @@ class World {
         this.setWorld();
     }
 
+    // ########### Methods ###########
     setWorld() {
         this.character.world = this;
     }
@@ -45,15 +48,27 @@ class World {
 
     addToMap(mo) {
         if (mo.otherDirection) {
-            this.ctx.save(); //* Speichert die Eigenschaften von unserem Context
-            this.ctx.translate(mo.width, 0); //* Wir spiegeln das Bild um 180°
-            this.ctx.scale(-1, 1); //* Hier verschieben wir das Bild wieder ein Stück nach rechts (um die Breite des Elements)
-            mo.x = mo.x * -1; //* Dasselbe machen wir hier mit der X Koordinate
+            this.flipImage(mo);
         }
-        this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
+        mo.draw(this.ctx);
+
+        //* Rahmen drum herum malen für Collission
+        mo.drawFrame(this.ctx);
+
         if (mo.otherDirection) {
-            mo.x = mo.x * -1;
-            this.ctx.restore();
+            this.flipImageBack(mo);
         }
+    }
+
+    flipImage(mo) {
+        this.ctx.save(); //* Speichert die Eigenschaften von unserem Context
+        this.ctx.translate(mo.width, 0); //* Wir spiegeln das Bild um 180°
+        this.ctx.scale(-1, 1); //* Hier verschieben wir das Bild wieder ein Stück nach rechts (um die Breite des Elements)
+        mo.x = mo.x * -1; //* Dasselbe machen wir hier mit der X Koordinate
+    }
+
+    flipImageBack(mo) {
+        mo.x = mo.x * -1;
+        this.ctx.restore();
     }
 }

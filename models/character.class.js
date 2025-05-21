@@ -31,6 +31,7 @@ class Character extends MovableObject {
         this.animate();
     }
 
+    // ########### Methods ###########
     animate() {
         setInterval(() => {
             if (

@@ -1,4 +1,5 @@
 class MovableObject {
+    // ########### Attributes ###########
     x = 120;
     y = 50;
     img;
@@ -27,6 +28,18 @@ class MovableObject {
     loadImage(path) {
         this.img = new Image();
         this.img.src = path;
+    }
+
+    draw(ctx) {
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+    }
+    //* Rahmen drum herum malen für Collission
+    drawFrame(ctx) {
+        ctx.beginPath();
+        ctx.lineWidth = '3';
+        ctx.strokeStyle = 'blue';
+        ctx.rect(this.x, this.y, this.width, this.height);
+        ctx.stroke();
     }
 
     loadImages(arr) {
