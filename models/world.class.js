@@ -14,11 +14,27 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
+        this.checkCollisions();
     }
 
     // ########### Methods ###########
     setWorld() {
         this.character.world = this;
+    }
+
+    // Checkt ob eine Kollission stattfindet
+    checkCollisions() {
+        setInterval(() => {
+            this.level.enemies.forEach((enemy) => {
+                if (this.character.isColliding(enemy)) {
+                    this.character.hit();
+                    console.log(
+                        'Collision with Character, energy',
+                        this.character.energy
+                    );
+                }
+            });
+        }, 200);
     }
 
     draw() {
