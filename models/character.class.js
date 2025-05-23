@@ -38,6 +38,17 @@ class Character extends MovableObject {
         'img/2_character_pepe/5_dead/D-57.png',
     ];
     world;
+    rX;
+    rY;
+    rW;
+    rH;
+
+    offset = {
+        top: 90,
+        right: 220,
+        bottom: 90,
+        left: 220,
+    };
 
     constructor() {
         super().loadImage('img/2_character_pepe/2_walk/W-21.png');
@@ -47,9 +58,18 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_HURT);
         this.applyGravity();
         this.animate();
+        this.getRealFrame();
     }
 
     // ########### Methods ###########
+
+    getRealFrame() {
+        this.rX = this.x + this.offset.left;
+        this.rY = this.y + this.offset.top;
+        this.rW = this.w - this.offset.left - this.offset.right;
+        this.rH = this.h - this.offset.top - this.offset.bottom;
+    }
+
     animate() {
         setInterval(() => {
             if (
@@ -88,7 +108,7 @@ class Character extends MovableObject {
                     this.playAnimation(this.IMAGES_WALKING);
                 }
             }
-        }, 50);
+        }, 1000 / 20);
     }
 
     jump() {
