@@ -11,7 +11,9 @@ class MovableObject extends DrawableObject {
 
     //#endregion
     // ########### Constructor ###########
-
+    constructor() {
+        super();
+    }
     // ########### Methods ###########
 
     /**
@@ -35,7 +37,12 @@ class MovableObject extends DrawableObject {
     }
 
     isAboveGround() {
-        return this.y < 175; //* Abfrage ob der Charakter am Boden ist oder nicht.
+        if (this instanceof ThrowableObject) {
+            //* Throwable Objects should always fall
+            return true;
+        } else {
+            return this.y < 175; //* Abfrage ob der Charakter am Boden ist oder nicht.
+        }
     }
 
     // charakter.isColliding(chicken)

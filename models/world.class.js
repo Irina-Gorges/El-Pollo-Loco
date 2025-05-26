@@ -9,6 +9,7 @@ class World {
     statusBar = new StatusBar();
     coinsBar = new CoinsBar();
     bottleBar = new BottleBar();
+    throwableObjects = [];
 
     // ########### Constructor ###########
     constructor(canvas, keyboard) {
@@ -17,7 +18,7 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
-        this.checkCollisions();
+        this.run();
     }
 
     // ########### Methods ###########
@@ -25,22 +26,37 @@ class World {
         this.character.world = this;
     }
 
-    // Checkt ob eine Kollission stattfindet
-    checkCollisions() {
+    run() {
         setInterval(() => {
-            this.level.enemies.forEach((enemy) => {
-                if (this.character.isColliding(enemy)) {
-                    this.character.hit();
-                    this.statusBar.setHealth(this.character.energy);
-                    this.coinsBar.setCoins(this.character.coins);
-                    this.bottleBar.setBottles(this.character.bottles);
-                    console.log(
-                        'Collision with Character, energy',
-                        this.character.energy
-                    );
-                }
-            });
+            this.checkCollisions();
+            this.checkThrowObjects();
         }, 1000 / 5);
+    }
+
+    // Checkt ob eine Kollission stattfindet
+    checkThrowObjects() {
+        if (this.keyboard.D) {
+            let bottle = new ThrowableObject(
+                this.character.x + 100,
+                this.character.y + 100
+            );
+            this.throwableObjects.push(bottle);
+        }
+    }
+
+    checkCollisions() {
+        this.level.enemies.forEach((enemy) => {
+            if (this.character.isColliding(enemy)) {
+                this.character.hit();
+                this.statusBar.setHealth(this.character.energy);
+                this.coinsBar.setCoins(this.character.coins);
+                this.bottleBar.setBottles(this.character.bottles);
+                console.log(
+                    'Collision with Character, energy',
+                    this.character.energy
+                );
+            }
+        });
     }
 
     /**
@@ -67,6 +83,7 @@ class World {
         this.addObjectsToMap(this.level.clouds);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.throwableObjects);
 
         this.ctx.translate(-this.camera_x, 0);
 
