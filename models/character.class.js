@@ -53,7 +53,7 @@ class Character extends MovableObject {
     ];
     world;
     //#endregion
-    // ########### Constructor ###########
+
     /**
      * Constructor for the Character class.
      *
@@ -72,8 +72,6 @@ class Character extends MovableObject {
         this.animate();
         this.getRealFrame();
     }
-
-    // ########### Methods ###########
 
     /**
      * Calculates the real frame of the Character object.
