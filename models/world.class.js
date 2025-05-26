@@ -37,6 +37,13 @@ class World {
         }, 1000 / 5);
     }
 
+    /**
+     * Zeichnet die Welt auf den Bildschirm
+     * Die draw() Methode wird immer wieder aufgerufen
+     * und sorgt dafür, dass die Welt auf den Bildschirm
+     * gezeichnet wird. Sie wird immer wieder
+     * von requestAnimationFrame aufgerufen.
+     */
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
@@ -56,35 +63,70 @@ class World {
         });
     }
 
+    /**
+     * Iterates over an array of objects and adds each object to the map.
+     *
+     * @param {Array} objects - The array of objects to be added to the map.
+     */
+
     addObjectsToMap(objects) {
         objects.forEach((o) => {
             this.addToMap(o);
         });
     }
 
+    /**
+     * Adds a movable object to the map by drawing it on the canvas.
+     * If the object is facing the opposite direction, it flips the image
+     * horizontally before drawing. It also draws frames around the object
+     * for collision detection. After drawing, if the object was flipped,
+     * it reverts the flip to maintain the original object state.
+     *
+     * @param {MovableObject} mo - The movable object to be added to the map.
+     */
+
     addToMap(mo) {
         if (mo.otherDirection) {
             this.flipImage(mo);
         }
         mo.draw(this.ctx);
-
-        //* Rahmen drum herum malen für Collission
-        mo.drawFrame(this.ctx);
-
+ 
         if (mo.otherDirection) {
             this.flipImageBack(mo);
         }
+        //* Rahmen drum herum malen für Collission
+        mo.drawFrame(this.ctx);
+        mo.drawRedFrame(this.ctx);
     }
+
+    /**
+     * Flips the image of the movable object horizontally on the canvas.
+     * This involves saving the current canvas context, then translating
+     * and scaling the context to achieve the flip effect. The object's x
+     * coordinate is also inverted to match the visual transformation.
+     *
+     * @param {MovableObject} mo - The movable object whose image is to be flipped.
+     */
 
     flipImage(mo) {
         this.ctx.save(); //* Speichert die Eigenschaften von unserem Context
         this.ctx.translate(mo.width, 0); //* Wir spiegeln das Bild um 180°
         this.ctx.scale(-1, 1); //* Hier verschieben wir das Bild wieder ein Stück nach rechts (um die Breite des Elements)
         mo.x = mo.x * -1; //* Dasselbe machen wir hier mit der X Koordinate
+        mo.rX = mo.rX * -1;
     }
+
+    /**
+     * Reverts the horizontal flip of the image of the movable object on the canvas.
+     * This involves restoring the canvas context to its previous state and
+     * reverting the x coordinate transformation that was applied during the flip.
+     *
+     * @param {MovableObject} mo - The movable object whose image flip is to be reverted.
+     */
 
     flipImageBack(mo) {
         mo.x = mo.x * -1;
+        mo.rX = mo.rX * -1;
         this.ctx.restore();
     }
 }
