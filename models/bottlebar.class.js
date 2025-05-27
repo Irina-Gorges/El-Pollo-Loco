@@ -1,22 +1,15 @@
 class BottleBar extends DrawableObject {
-    IMAGES_BOTTLES = [
-        'img/7_statusbars/1_statusbar/3_statusbar_bottle/green/0.png',
-        'img/7_statusbars/1_statusbar/3_statusbar_bottle/green/20.png',
-        'img/7_statusbars/1_statusbar/3_statusbar_bottle/green/40.png',
-        'img/7_statusbars/1_statusbar/3_statusbar_bottle/green/60.png',
-        'img/7_statusbars/1_statusbar/3_statusbar_bottle/green/80.png',
-        'img/7_statusbars/1_statusbar/3_statusbar_bottle/green/100.png',
-    ];
+    IMAGES_BOTTLES = ImageHub.bottlebar.IMAGES_BOTTLES;
 
     bottles = 0;
 
     constructor() {
         super();
         this.loadImages(this.IMAGES_BOTTLES);
-        this.x = 20;
-        this.y = 75;
-        this.width = 200;
-        this.height = 55;
+        this.x = 340;
+        this.y = 0;
+        this.width = 150;
+        this.height = 45;
         this.setBottles(0); // Setzt das Anfangsbild der Bottlesbar ein
     }
 

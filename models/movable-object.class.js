@@ -10,9 +10,11 @@ class MovableObject extends DrawableObject {
     lastHit = 0;
 
     //#endregion
+
     // ########### Constructor ###########
     constructor() {
         super();
+        IntervalHub.startInterval(this.applyGravity, 1000 / 25);
     }
     // ########### Methods ###########
 
@@ -25,16 +27,13 @@ class MovableObject extends DrawableObject {
      *
      * @method applyGravity
      */
-    applyGravity() {
-        setInterval(() => {
-            if (this.isAboveGround() || this.speedY > 0) {
-                this.y -= this.speedY;
-                this.rY -= this.speedY;
-                this.speedY -= this.acceleration;
-                // this.updatePosition();
-            }
-        }, 1000 / 25);
-    }
+    applyGravity = () => {
+        if (this.isAboveGround() || this.speedY > 0) {
+            this.y -= this.speedY;
+            this.rY -= this.speedY;
+            this.speedY -= this.acceleration;
+        }
+    };
 
     isAboveGround() {
         if (this instanceof ThrowableObject) {

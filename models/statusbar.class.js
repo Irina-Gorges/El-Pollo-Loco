@@ -1,12 +1,5 @@
 class StatusBar extends DrawableObject {
-    IMAGES_STATUS = [
-        'img/7_statusbars/1_statusbar/2_statusbar_health/green/0.png',
-        'img/7_statusbars/1_statusbar/2_statusbar_health/green/20.png',
-        'img/7_statusbars/1_statusbar/2_statusbar_health/green/40.png',
-        'img/7_statusbars/1_statusbar/2_statusbar_health/green/60.png',
-        'img/7_statusbars/1_statusbar/2_statusbar_health/green/80.png',
-        'img/7_statusbars/1_statusbar/2_statusbar_health/green/100.png',
-    ];
+    IMAGES_STATUS = ImageHub.statusbar.IMAGES_STATUS;
 
     health = 100;
 
@@ -14,9 +7,9 @@ class StatusBar extends DrawableObject {
         super();
         this.loadImages(this.IMAGES_STATUS);
         this.x = 20;
-        this.y = -5;
-        this.width = 200;
-        this.height = 55;
+        this.y = 0;
+        this.width = 150;
+        this.height = 45;
         this.setHealth(100); // setzt das Anfangsbild der Statusbar ein
     }
 

@@ -1,22 +1,15 @@
 class CoinsBar extends DrawableObject {
-    IMAGES_COINS = [
-        'img/7_statusbars/1_statusbar/1_statusbar_coin/green/0.png',
-        'img/7_statusbars/1_statusbar/1_statusbar_coin/green/20.png',
-        'img/7_statusbars/1_statusbar/1_statusbar_coin/green/40.png',
-        'img/7_statusbars/1_statusbar/1_statusbar_coin/green/60.png',
-        'img/7_statusbars/1_statusbar/1_statusbar_coin/green/80.png',
-        'img/7_statusbars/1_statusbar/1_statusbar_coin/green/100.png',
-    ];
+    IMAGES_COINS = ImageHub.coinsbar.IMAGES_COINS;
 
     coins = 0;
 
     constructor() {
         super();
         this.loadImages(this.IMAGES_COINS);
-        this.x = 20;
-        this.y = 35;
-        this.width = 200;
-        this.height = 55;
+        this.x = 180;
+        this.y = 0;
+        this.width = 150;
+        this.height = 45;
         this.setCoins(0); // Setzt das Anfangsbild der Coinsbar ein
     }
 

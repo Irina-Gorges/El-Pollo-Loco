@@ -18,7 +18,8 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
-        this.run();
+        IntervalHub.startInterval(this.run, 1000 / 5);
+        // this.run();
     }
 
     // ########### Methods ###########
@@ -26,12 +27,10 @@ class World {
         this.character.world = this;
     }
 
-    run() {
-        setInterval(() => {
-            this.checkCollisions();
-            this.checkThrowObjects();
-        }, 1000 / 5);
-    }
+    run = () => {
+        this.checkCollisions();
+        this.checkThrowObjects();
+    };
 
     // Checkt ob eine Kollission stattfindet
     checkThrowObjects() {
