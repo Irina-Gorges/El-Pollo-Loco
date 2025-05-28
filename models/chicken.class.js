@@ -27,7 +27,7 @@ class Chicken extends MovableObject {
         this.loadImages(this.IMAGES_WALKING);
         this.x = this.x + Math.random() * 500;
         this.speed = 0.15 + Math.random() * 0.5;
-        IntervalHub.startInterval(this.animate, 1000 / 60, 100 / 5);
+        IntervalHub.startInterval(this.animate, 1000 / 15, 100 / 5);
         // this.animate();
         this.getRealFrame();
     }
@@ -42,7 +42,7 @@ class Chicken extends MovableObject {
     }
 
     animate = () => {
-            this.moveLeft();
-            this.playAnimation(this.IMAGES_WALKING);
-    }
+        this.moveLeft();
+        this.playAnimation(this.IMAGES_WALKING);
+    };
 }

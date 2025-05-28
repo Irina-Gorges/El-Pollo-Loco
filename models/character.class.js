@@ -46,12 +46,11 @@ class Character extends MovableObject {
     animatSpeedRef() {
         let result = IntervalHub.startInterval(this.animate, 1000 / 20);
         if (!this.isDead()) {
-            result = IntervalHub.startInterval(this.animate, 1000 / 30);
+            result = IntervalHub.startInterval(this.animate, 1000 / 20);
         }
         return result;
     }
 
-    
     //#region animate
     /**
      * Animates the character based on keyboard input and state.

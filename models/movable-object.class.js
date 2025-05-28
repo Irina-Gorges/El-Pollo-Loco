@@ -1,7 +1,7 @@
 class MovableObject extends DrawableObject {
     //#region Properties
 
-    speed = 0.10;
+    speed = 0.15;
     otherDirection = false; //* der Charakter switcht von links nach rechts
     speedY = 0; //* der Charakter fällt von oben nach unten
     acceleration = 2.5; //* wie schnell fällt der Charakter
@@ -101,3 +101,4 @@ class MovableObject extends DrawableObject {
         this.speedY = 30;
     }
 }
+ 

@@ -4,26 +4,27 @@ class ThrowableObject extends MovableObject {
 
     offset = {
         top: 0,
-        right: 0,
+        right: 20,
         bottom: 0,
-        left: 0,
+        left: 20,
     };
 
     constructor(x, y) {
         super().loadImage('img/6_salsa_bottle/salsa_bottle.png');
         this.x = x;
         this.y = y;
-        IntervalHub.startInterval(this.throw, 1000 / 40);
-        this.animate();
+
+        // this.applyGravity(); // nur 1x aktivieren
+        IntervalHub.startInterval(this.applyGravity, 1000 / 40);
+        IntervalHub.startInterval(this.throw, 1000 / 40); // regelmäßiger Aufruf
     }
 
     throw = () => {
-        this.speedY = 30;
-        this.applyGravity();
-        this.x += 10;
-    };
+        if (!this.hasBeenThrown) {
+            this.speedY = 25; // vertikale Anfangsgeschwindigkeit
+            this.hasBeenThrown = true;
+        }
 
-    animate() {
-        this.getRealFrame();
-    }
+        this.x += 15; // horizontale Bewegung
+    };
 }
