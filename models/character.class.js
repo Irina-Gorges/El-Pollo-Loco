@@ -5,13 +5,14 @@ class Character extends MovableObject {
     height = 260;
 
     rX;
+    rY;
     rW;
     rH;
 
     offset = {
-        top: 220,
+        top: 100,
         right: 30,
-        bottom: -100,
+        bottom: 10,
         left: 32,
     };
 
@@ -37,29 +38,20 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_JUMPING);
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_HURT);
-        // this.applyGravity();
         IntervalHub.startInterval(this.applyGravity, 1000 / 25);
-        IntervalHub.startInterval(this.animate, 1000 / 60, 1000 / 20);
+        this.animatSpeedRef();
         this.getRealFrame();
     }
 
-    /**
-     * Calculates the real frame of the Character object.
-     *
-     * The real frame is the area of the object that is actually visible on the screen.
-     * It is calculated by adding the offset values to the x and y coordinates, and
-     * subtracting the offset values from the width and height of the object.
-     * The offset values are the distances from the edges of the object's bounding box
-     * to the edges of the object itself.
-     */
-    getRealFrame() {
-        this.rX = this.x + this.offset.left;
-        if (this.y != 70) {
-            this.rY = this.y + this.offset.top;
+    animatSpeedRef() {
+        let result = IntervalHub.startInterval(this.animate, 1000 / 20);
+        if (!this.isDead()) {
+            result = IntervalHub.startInterval(this.animate, 1000 / 30);
         }
-        this.rW = this.width - this.offset.left - this.offset.right;
-        this.rH = this.height - this.offset.top - this.offset.bottom;
+        return result;
     }
+
+    
     //#region animate
     /**
      * Animates the character based on keyboard input and state.
@@ -96,7 +88,8 @@ class Character extends MovableObject {
 
         if (this.isDead()) {
             // Dead Animation
-            this.playAnimation(this.IMAGES_DEAD) + IntervalHub.stopAllIntervals();
+            this.playAnimation(this.IMAGES_DEAD) +
+                IntervalHub.stopAllIntervals();
             // Hurt Animation
         } else if (this.isHurt()) {
             this.playAnimation(this.IMAGES_HURT);

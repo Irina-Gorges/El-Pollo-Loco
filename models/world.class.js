@@ -19,7 +19,6 @@ class World {
         this.draw();
         this.setWorld();
         IntervalHub.startInterval(this.run, 1000 / 5);
-        // this.run();
     }
 
     // ########### Methods ###########
@@ -71,6 +70,7 @@ class World {
         this.ctx.translate(this.camera_x, 0);
 
         this.addObjectsToMap(this.level.backgroundObjects);
+        this.addObjectsToMap(this.level.clouds);
 
         this.ctx.translate(-this.camera_x, 0); // Back
         //* ----- Space for fixed objects -----
@@ -79,7 +79,6 @@ class World {
         this.addToMap(this.bottleBar);
         this.ctx.translate(this.camera_x, 0); // Forward
 
-        this.addObjectsToMap(this.level.clouds);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.throwableObjects);

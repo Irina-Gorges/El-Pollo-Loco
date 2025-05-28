@@ -1,12 +1,20 @@
 class ThrowableObject extends MovableObject {
+    width = 70;
+    height = 70;
+
+    offset = {
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+    };
+
     constructor(x, y) {
-        super().loadImage('img/7_statusbars/3_icons/icon_salsa_bottle.png');
+        super().loadImage('img/6_salsa_bottle/salsa_bottle.png');
         this.x = x;
         this.y = y;
-        this.width = 75;
-        this.height = 80;
         IntervalHub.startInterval(this.throw, 1000 / 40);
-        // this.throw();
+        this.animate();
     }
 
     throw = () => {
@@ -14,4 +22,8 @@ class ThrowableObject extends MovableObject {
         this.applyGravity();
         this.x += 10;
     };
+
+    animate() {
+        this.getRealFrame();
+    }
 }

@@ -32,21 +32,18 @@ class DrawableObject {
             ctx.rect(this.x, this.y, this.width, this.height);
             ctx.stroke();
         }
-        if (this instanceof Chicken) {
-            ctx.beginPath();
-            ctx.lineWidth = '2';
-            ctx.strokeStyle = 'yellow';
-            ctx.rect(this.rX, this.rY, this.rW, this.rH);
-            ctx.stroke();
-        }
     }
 
     /**
-     * Zeichnet einen roten Rahmen um das MovableObject (nur für Character)
+     * Zeichnet einen roten Rahmen um das MovableObject
      * @param {CanvasRenderingContext2D} ctx - der Context des Canvas-Elements
      */
     drawRedFrame(ctx) {
-        if (this instanceof Character) {
+        if (
+            this instanceof Character ||
+            this instanceof Chicken ||
+            this instanceof ThrowableObject
+        ) {
             ctx.beginPath();
             ctx.lineWidth = '2';
             ctx.strokeStyle = 'red';
@@ -55,6 +52,22 @@ class DrawableObject {
         }
     }
     //#endregion
+
+    /**
+     * Calculates the real frame of the Character object.
+     *
+     * The real frame is the area of the object that is actually visible on the screen.
+     * It is calculated by adding the offset values to the x and y coordinates, and
+     * subtracting the offset values from the width and height of the object.
+     * The offset values are the distances from the edges of the object's bounding box
+     * to the edges of the object itself.
+     */
+    getRealFrame() {
+        this.rX = this.x + this.offset.left;
+        this.rY = this.y + this.offset.top;
+        this.rW = this.width - this.offset.left - this.offset.right;
+        this.rH = this.height - this.offset.top - this.offset.bottom;
+    }
 
     /**
      * Loads all images from the given array into the movable object's imageCache.
