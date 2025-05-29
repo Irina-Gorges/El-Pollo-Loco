@@ -20,6 +20,8 @@ class Character extends MovableObject {
     IMAGES_JUMPING = ImageHub.character.IMAGES_JUMPING;
     IMAGES_DEAD = ImageHub.character.IMAGES_DEAD;
     IMAGES_HURT = ImageHub.character.IMAGES_HURT;
+    IMAGES_IDLE = ImageHub.character.IMAGES_IDLE;
+    IMAGES_LONGIDLE = ImageHub.character.IMAGES_LONGIDLE;
 
     world;
     //#endregion
@@ -83,7 +85,7 @@ class Character extends MovableObject {
         if (this.world.keyboard.SPACE && !this.isAboveGround()) {
             this.jump();
         }
-        this.world.camera_x = -this.x + 100;
+        this.world.camera_x = -this.x + 100; //* Wo zu Beginn Pepe steht
 
         if (this.isDead()) {
             // Dead Animation

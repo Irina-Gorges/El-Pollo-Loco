@@ -4,7 +4,7 @@ class MovableObject extends DrawableObject {
     speed = 0.15;
     otherDirection = false; //* der Charakter switcht von links nach rechts
     speedY = 0; //* der Charakter fällt von oben nach unten
-    acceleration = 2.5; //* wie schnell fällt der Charakter
+    acceleration = 2.2; //* wie schnell fällt der Charakter
     energy = 100; //* die Lebensanzeige des Charakters
     lastHit = 0;
 
@@ -13,7 +13,7 @@ class MovableObject extends DrawableObject {
     // ########### Constructor ###########
     constructor() {
         super();
-    } 
+    }
     // ########### Methods ###########
 
     /**
@@ -80,7 +80,7 @@ class MovableObject extends DrawableObject {
         return this.energy == 0;
     }
 
-    playAnimation(images) {
+    playAnimation(images) { // Walk Animation
         let i = this.currentImage % images.length; // let i = 0 % 6;  //* i = 0, 1, 2, 3, 4, 5, 0
         let path = images[i]; //* Hier laden wir das 0. Bild aus dem Array rein
         this.img = this.imageCache[path]; //* Hier sage ich, das ich das Bild in unseren Cache so setze.
@@ -101,4 +101,3 @@ class MovableObject extends DrawableObject {
         this.speedY = 30;
     }
 }
- 

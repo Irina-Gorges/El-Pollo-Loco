@@ -36,6 +36,32 @@ class ImageHub {
             'img/2_character_pepe/5_dead/D-56.png',
             'img/2_character_pepe/5_dead/D-57.png',
         ],
+
+        IMAGES_IDLE: [
+            'img/2_character_pepe/1_idle/idle/I-1.png',
+            'img/2_character_pepe/1_idle/idle/I-2.png',
+            'img/2_character_pepe/1_idle/idle/I-3.png',
+            'img/2_character_pepe/1_idle/idle/I-4.png',
+            'img/2_character_pepe/1_idle/idle/I-5.png',
+            'img/2_character_pepe/1_idle/idle/I-6.png',
+            'img/2_character_pepe/1_idle/idle/I-7.png',
+            'img/2_character_pepe/1_idle/idle/I-8.png',
+            'img/2_character_pepe/1_idle/idle/I-9.png',
+            'img/2_character_pepe/1_idle/idle/I-10.png',
+        ],
+
+        IMAGES_LONGIDLE: [
+            'img/2_character_pepe/1_idle/long_idle/I-11.png',
+            'img/2_character_pepe/1_idle/long_idle/I-12.png',
+            'img/2_character_pepe/1_idle/long_idle/I-13.png',
+            'img/2_character_pepe/1_idle/long_idle/I-14.png',
+            'img/2_character_pepe/1_idle/long_idle/I-15.png',
+            'img/2_character_pepe/1_idle/long_idle/I-16.png',
+            'img/2_character_pepe/1_idle/long_idle/I-17.png',
+            'img/2_character_pepe/1_idle/long_idle/I-18.png',
+            'img/2_character_pepe/1_idle/long_idle/I-19.png',
+            'img/2_character_pepe/1_idle/long_idle/I-20.png',
+        ],
     };
 
     static chicken = {
@@ -88,6 +114,24 @@ class ImageHub {
             'img/7_statusbars/1_statusbar/3_statusbar_bottle/green/60.png',
             'img/7_statusbars/1_statusbar/3_statusbar_bottle/green/80.png',
             'img/7_statusbars/1_statusbar/3_statusbar_bottle/green/100.png',
+        ],
+    };
+
+    static bottle = {
+        IMAGES_THROW: [
+            'img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png',
+            'img/6_salsa_bottle/bottle_rotation/2_bottle_rotation.png',
+            'img/6_salsa_bottle/bottle_rotation/3_bottle_rotation.png',
+            'img/6_salsa_bottle/bottle_rotation/4_bottle_rotation.png',
+        ],
+
+        IMAGES_SPLASH: [
+            'img/6_salsa_bottle/bottle_rotation/bottle_splash/1_bottle_splash.png',
+            'img/6_salsa_bottle/bottle_rotation/bottle_splash/2_bottle_splash.png',
+            'img/6_salsa_bottle/bottle_rotation/bottle_splash/3_bottle_splash.png',
+            'img/6_salsa_bottle/bottle_rotation/bottle_splash/4_bottle_splash.png',
+            'img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png',
+            'img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png',
         ],
     };
 }
