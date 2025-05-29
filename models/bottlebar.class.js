@@ -23,13 +23,13 @@ class BottleBar extends DrawableObject {
     resolveImageIndex() {
         if (this.bottles == 0) {
             return 0;
-        } else if (this.bottles > 20) {
+        } else if (this.bottles > 2) {
             return 1;
-        } else if (this.bottles > 40) {
+        } else if (this.bottles > 4) {
             return 2;
-        } else if (this.bottles > 60) {
+        } else if (this.bottles > 6) {
             return 3;
-        } else if (this.bottles > 80) {
+        } else if (this.bottles > 8) {
             return 4;
         } else {
             return 5;

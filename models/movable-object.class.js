@@ -13,6 +13,8 @@ class MovableObject extends DrawableObject {
     // ########### Constructor ###########
     constructor() {
         super();
+        this.animationCounter = 0;
+        this.animationFrameRate = 4; // Je höher, desto langsamer die Animation
     }
     // ########### Methods ###########
 
@@ -80,11 +82,15 @@ class MovableObject extends DrawableObject {
         return this.energy == 0;
     }
 
-    playAnimation(images) { // Walk Animation
-        let i = this.currentImage % images.length; // let i = 0 % 6;  //* i = 0, 1, 2, 3, 4, 5, 0
-        let path = images[i]; //* Hier laden wir das 0. Bild aus dem Array rein
-        this.img = this.imageCache[path]; //* Hier sage ich, das ich das Bild in unseren Cache so setze.
-        this.currentImage++; //* Hier wird dann das Bild immer um eins erhöht.
+    playAnimation(images) {
+        this.animationCounter++;
+
+        if (this.animationCounter % this.animationFrameRate === 0) {
+            let i = this.currentImage % images.length;
+            let path = images[i];
+            this.img = this.imageCache[path];
+            this.currentImage++;
+        }
     }
 
     moveRight() {

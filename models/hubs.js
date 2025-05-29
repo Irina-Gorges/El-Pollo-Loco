@@ -50,7 +50,7 @@ class ImageHub {
             'img/2_character_pepe/1_idle/idle/I-10.png',
         ],
 
-        IMAGES_LONGIDLE: [
+        IMAGES_LONG_IDLE: [
             'img/2_character_pepe/1_idle/long_idle/I-11.png',
             'img/2_character_pepe/1_idle/long_idle/I-12.png',
             'img/2_character_pepe/1_idle/long_idle/I-13.png',

@@ -33,12 +33,17 @@ class World {
 
     // Checkt ob eine Kollission stattfindet
     checkThrowObjects() {
-        if (this.keyboard.D) {
+        if (this.keyboard.D && !this.character.isThrowing) {
             const bottle = new ThrowableObject(
                 this.character.x + 100,
                 this.character.y + 100
             );
             this.throwableObjects.push(bottle);
+
+            // Flag aktivieren und Zeit setzen
+            this.character.isThrowing = true;
+            this.character.throwStartTime = new Date().getTime();
+            this.character.lastMoveTime = this.character.throwStartTime;
         }
     }
 

@@ -21,7 +21,7 @@ class Character extends MovableObject {
     IMAGES_DEAD = ImageHub.character.IMAGES_DEAD;
     IMAGES_HURT = ImageHub.character.IMAGES_HURT;
     IMAGES_IDLE = ImageHub.character.IMAGES_IDLE;
-    IMAGES_LONGIDLE = ImageHub.character.IMAGES_LONGIDLE;
+    IMAGES_LONG_IDLE = ImageHub.character.IMAGES_LONG_IDLE;
 
     world;
     //#endregion
@@ -36,6 +36,8 @@ class Character extends MovableObject {
      */
     constructor() {
         super().loadImage('img/2_character_pepe/2_walk/W-21.png');
+        this.loadImages(this.IMAGES_IDLE);
+        this.loadImages(this.IMAGES_LONG_IDLE);
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_JUMPING);
         this.loadImages(this.IMAGES_DEAD);
@@ -43,6 +45,12 @@ class Character extends MovableObject {
         IntervalHub.startInterval(this.applyGravity, 1000 / 25);
         this.animatSpeedRef();
         this.getRealFrame();
+        this.lastMoveTime = new Date().getTime();
+        this.idleStartTime = null;
+        this.IDLE_THRESHOLD = 15000; // 15 sek bis LONG_IDLE
+        this.isThrowing = false;
+        this.throwStartTime = null;
+        this.throwDuration = 30; // ms
     }
 
     animatSpeedRef() {
@@ -54,53 +62,54 @@ class Character extends MovableObject {
     }
 
     //#region animate
-    /**
-     * Animates the character based on keyboard input and state.
-     *
-     * This method uses setInterval to continuously update the character's position
-     * and animation based on the keyboard input. The character can move right or left
-     * and jump if the corresponding keys are pressed. The camera position is adjusted
-     * as the character moves.
-     *
-     * Additionally, the character's animation is updated based on their current state:
-     * - If the character is dead, the `IMAGES_DEAD` animation is played.
-     * - If the character is hurt, the `IMAGES_HURT` animation is played.
-     * - If the character is in the air (jumping), the `IMAGES_JUMPING` animation is played.
-     * - If the character is on the ground and moving, the `IMAGES_WALKING` animation is played.
-     */
-
     animate = () => {
+        const currentTime = new Date().getTime();
+
+        if (
+            this.isThrowing &&
+            currentTime - this.throwStartTime > this.throwDuration
+        ) {
+            this.isThrowing = false;
+        }
+
         if (
             this.world.keyboard.RIGHT &&
             this.x < this.world.level.level_end_x
         ) {
             this.moveRight();
             this.otherDirection = false;
+            this.lastMoveTime = currentTime;
         }
         if (this.world.keyboard.LEFT && this.x > 0) {
             this.moveLeft();
-            this.otherDirection = true; //* Wenn Pepe rückwärts läuft, dann wird sein Charakter gespiegelt
+            this.otherDirection = true;
+            this.lastMoveTime = currentTime;
         }
-        //* Wenn der Charakter NICHT auf dem Boden ist, dann springt er
         if (this.world.keyboard.SPACE && !this.isAboveGround()) {
             this.jump();
+            this.lastMoveTime = currentTime;
         }
-        this.world.camera_x = -this.x + 100; //* Wo zu Beginn Pepe steht
+
+        this.world.camera_x = -this.x + 100;
 
         if (this.isDead()) {
-            // Dead Animation
-            this.playAnimation(this.IMAGES_DEAD) +
-                IntervalHub.stopAllIntervals();
-            // Hurt Animation
+            this.playAnimation(this.IMAGES_DEAD);
+            IntervalHub.stopAllIntervals();
         } else if (this.isHurt()) {
             this.playAnimation(this.IMAGES_HURT);
         } else if (this.isAboveGround()) {
-            // Jump Animation
             this.playAnimation(this.IMAGES_JUMPING);
+        } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+            this.animationFrameRate = 5;
+            this.playAnimation(this.IMAGES_WALKING);
         } else {
-            if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-                // Walk Animation
-                this.playAnimation(this.IMAGES_WALKING);
+            const idleDuration = currentTime - this.lastMoveTime;
+            if (idleDuration > this.IDLE_THRESHOLD) {
+                this.animationFrameRate = 5; // normal
+                this.playAnimation(this.IMAGES_LONG_IDLE);
+            } else {
+                this.animationFrameRate = 10; // slower
+                this.playAnimation(this.IMAGES_IDLE);
             }
         }
     };
