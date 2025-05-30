@@ -1,9 +1,9 @@
 class SmallChicken extends MovableObject {
     //#region Properties
     x = 260;
-    y = 350;
+    y = 380;
     width = 50;
-    height = 30;
+    height = 50;
 
     rX;
     rY;
@@ -17,15 +17,15 @@ class SmallChicken extends MovableObject {
         left: 5,
     };
 
-    IMAGES_WALKING = ImageHub.small_chicken.IMAGES_WALKING;
+    IMAGES_WALKING = ImageHub.chicken_small.IMAGES_WALKING;
     //#endregion
 
     constructor() {
         super().loadImage('img/3_enemies_chicken/chicken_small/1_walk/1_w.png');
         this.loadImages(this.IMAGES_WALKING);
-        this.x = this.x + Math.random() * 600;
-        this.speed = 0.15 + Math.random() * 0.5;
-        IntervalHub.startInterval(this.animate, 1000 / 15, 100 / 5);
+        this.x = this.x + Math.random() * 900;
+        this.speed = 0.25 + Math.random() * 0.5;
+        IntervalHub.startInterval(this.animate, 1000 / 32, 100 / 5);
     }
 
     // ########### Methods ###########

@@ -10,9 +10,12 @@
 body {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    padding: 30px 0;
-    background-color: cornflowerblue;
+    height: 100dvh;
+    background: url(./img/5_background/background_body.webp);
+    background-size: cover;
+    background-position: center;
 }
 
 canvas {
