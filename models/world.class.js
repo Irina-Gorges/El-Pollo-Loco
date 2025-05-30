@@ -33,7 +33,7 @@ class World {
 
     // Checkt ob eine Kollission stattfindet
     checkThrowObjects() {
-        if (this.keyboard.D && !this.character.isThrowing) {
+        if (this.keyboard.THROW && !this.character.isThrowing) {
             const bottle = new ThrowableObject(
                 this.character.x + 100,
                 this.character.y + 100

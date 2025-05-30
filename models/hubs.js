@@ -72,6 +72,13 @@ class ImageHub {
         ],
     };
 
+    static small_chicken = {
+       IMAGES_WALKING: ['img/3_enemies_chicken/chicken_small/1_walk/1_w.png',
+        'img/3_enemies_chicken/chicken_small/1_walk/2_w.png',
+        'img/3_enemies_chicken/chicken_small/1_walk/3_w.png',
+        ],
+    };
+
     static endboss = {
         IMAGES_WALKING: [
             'img/4_enemie_boss_chicken/2_alert/G5.png',
