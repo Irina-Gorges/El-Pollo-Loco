@@ -73,9 +73,10 @@ class ImageHub {
     };
 
     static chicken_small = {
-       IMAGES_WALKING: ['img/3_enemies_chicken/chicken_small/1_walk/1_w.png',
-        'img/3_enemies_chicken/chicken_small/1_walk/2_w.png',
-        'img/3_enemies_chicken/chicken_small/1_walk/3_w.png',
+        IMAGES_WALKING: [
+            'img/3_enemies_chicken/chicken_small/1_walk/1_w.png',
+            'img/3_enemies_chicken/chicken_small/1_walk/2_w.png',
+            'img/3_enemies_chicken/chicken_small/1_walk/3_w.png',
         ],
     };
 
@@ -103,7 +104,7 @@ class ImageHub {
     };
 
     static coinsbar = {
-        IMAGES_COINS: [
+        IMAGES_COINSB: [
             'img/7_statusbars/1_statusbar/1_statusbar_coin/green/0.png',
             'img/7_statusbars/1_statusbar/1_statusbar_coin/green/20.png',
             'img/7_statusbars/1_statusbar/1_statusbar_coin/green/40.png',
@@ -114,7 +115,7 @@ class ImageHub {
     };
 
     static bottlebar = {
-        IMAGES_BOTTLES: [
+        IMAGES_BOTTLESB: [
             'img/7_statusbars/1_statusbar/3_statusbar_bottle/green/0.png',
             'img/7_statusbars/1_statusbar/3_statusbar_bottle/green/20.png',
             'img/7_statusbars/1_statusbar/3_statusbar_bottle/green/40.png',
@@ -140,6 +141,10 @@ class ImageHub {
             'img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png',
             'img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png',
         ],
+    };
+
+    static coin = {
+        IMAGES_COIN: ['img/8_coin/coin_1.png', 'img/8_coin/coin_2.png'],
     };
 }
 

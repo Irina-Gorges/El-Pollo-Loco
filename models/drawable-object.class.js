@@ -42,7 +42,8 @@ class DrawableObject {
         if (
             this instanceof Character ||
             this instanceof Chicken ||
-            this instanceof ThrowableObject
+            this instanceof ThrowableObject ||
+            this instanceof Coin
         ) {
             ctx.beginPath();
             ctx.lineWidth = '2';

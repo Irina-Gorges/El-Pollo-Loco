@@ -1,11 +1,11 @@
 class BottleBar extends DrawableObject {
-    IMAGES_BOTTLES = ImageHub.bottlebar.IMAGES_BOTTLES;
+    IMAGES_BOTTLESB = ImageHub.bottlebar.IMAGES_BOTTLESB;
 
     bottles = 0;
 
     constructor() {
         super();
-        this.loadImages(this.IMAGES_BOTTLES);
+        this.loadImages(this.IMAGES_BOTTLESB);
         this.x = 340;
         this.y = 0;
         this.width = 150;
@@ -16,7 +16,7 @@ class BottleBar extends DrawableObject {
     //* Bottlesanzeige
     setBottles(bottles) {
         this.bottles = bottles;
-        let path = this.IMAGES_BOTTLES[this.resolveImageIndex()];
+        let path = this.IMAGES_BOTTLESB[this.resolveImageIndex()];
         this.img = this.imageCache[path];
     }
 

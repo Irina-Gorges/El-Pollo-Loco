@@ -1,11 +1,11 @@
 class CoinsBar extends DrawableObject {
-    IMAGES_COINS = ImageHub.coinsbar.IMAGES_COINS;
+    IMAGES_COINSB = ImageHub.coinsbar.IMAGES_COINSB;
 
     coins = 0;
 
     constructor() {
         super();
-        this.loadImages(this.IMAGES_COINS);
+        this.loadImages(this.IMAGES_COINSB);
         this.x = 180;
         this.y = 0;
         this.width = 150;
@@ -16,7 +16,7 @@ class CoinsBar extends DrawableObject {
     //* Coinsanzeige
     setCoins(coins) {
         this.coins = coins;
-        let path = this.IMAGES_COINS[this.resolveImageIndex()];
+        let path = this.IMAGES_COINSB[this.resolveImageIndex()];
         this.img = this.imageCache[path];
     }
 
