@@ -10,6 +10,7 @@ class World {
     coinsBar = new CoinsBar();
     bottleBar = new BottleBar();
     coin = new Coin();
+    bottlesOG = new BottlesOG();
     throwableObjects = [];
 
     // ########### Constructor ###########
@@ -89,6 +90,7 @@ class World {
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.throwableObjects);
         this.addToMap(this.coin);
+        this.addToMap(this.bottlesOG);
 
         this.ctx.translate(-this.camera_x, 0);
 

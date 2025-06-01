@@ -3,10 +3,12 @@ class Cloud extends MovableObject {
     width = 550;
     height = 300;
 
+    IMAGES_CLOUDS = ImageHub.clouds.IMAGES_CLOUDS;
+
     constructor() {
         super().loadImage('img/5_background/layers/4_clouds/1.png');
-
-        this.x = Math.random() * 900;
+        this.loadImages(this.IMAGES_CLOUDS);
+        this.x = Math.random() * 2200;
         IntervalHub.startInterval(this.animate, 1000 / 40);
     }
 

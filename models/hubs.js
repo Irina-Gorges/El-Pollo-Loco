@@ -64,6 +64,12 @@ class ImageHub {
         ],
     };
 
+    static clouds = {
+        IMAGES_CLOUDS: [
+            'img/5_background/layers/4_clouds/1.png',
+            'img/5_background/layers/4_clouds/2.png',
+        ],
+    };
     static chicken = {
         IMAGES_WALKING: [
             'img/3_enemies_chicken/chicken_normal/1_walk/1_w.png',
@@ -125,7 +131,7 @@ class ImageHub {
         ],
     };
 
-    static bottle = {
+    static bottles = {
         IMAGES_THROW: [
             'img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png',
             'img/6_salsa_bottle/bottle_rotation/2_bottle_rotation.png',
@@ -140,6 +146,13 @@ class ImageHub {
             'img/6_salsa_bottle/bottle_rotation/bottle_splash/4_bottle_splash.png',
             'img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png',
             'img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png',
+        ],
+    };
+
+    static bottlesOG = {
+        IMAGES_BOTTLES_OG: [
+            'img/6_salsa_bottle/1_salsa_bottle_on_ground.png',
+            'img/6_salsa_bottle/2_salsa_bottle_on_ground.png',
         ],
     };
 
