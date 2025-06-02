@@ -3,6 +3,13 @@ class Endboss extends MovableObject {
     width = 320;
     y = 60;
 
+    offset = {
+        top: 65,
+        right: 5,
+        bottom: 20,
+        left: 5,
+    };
+
     IMAGES_WALKING = ImageHub.endboss.IMAGES_WALKING;
 
     constructor() {
@@ -10,7 +17,14 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_WALKING);
         this.x = 2500;
         IntervalHub.startInterval(this.animate, 1000 / 5);
-        // this.animate();
+        this.getRealFrame();
+    }
+
+    getRealFrame() {
+        this.rX = this.x + this.offset.left;
+        this.rY = this.y + this.offset.top;
+        this.rW = this.width - this.offset.left - this.offset.right;
+        this.rH = this.height - this.offset.top - this.offset.bottom;
     }
 
     animate = () => {

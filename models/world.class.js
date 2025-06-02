@@ -1,7 +1,8 @@
 class World {
     // ########### Attributes ###########
     character = new Character();
-    level = level1;
+    isRunning = true;
+    level = new Level(); //* Hier muss new level dann rein, wenn level1 gelöscht ist
     canvas;
     ctx;
     keyboard;
@@ -10,7 +11,7 @@ class World {
     coinsBar = new CoinsBar();
     bottleBar = new BottleBar();
     coin = new Coin();
-    bottlesOG = new BottlesOG();
+    bottlesOG = new SalsaBottles();
     throwableObjects = [];
 
     // ########### Constructor ###########
@@ -72,9 +73,11 @@ class World {
      * von requestAnimationFrame aufgerufen.
      */
     draw() {
+        if (!this.isRunning) return;
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         this.ctx.translate(this.camera_x, 0);
+        requestAnimationFrame(() => this.draw());
 
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.clouds);
@@ -93,8 +96,10 @@ class World {
         this.addToMap(this.bottlesOG);
 
         this.ctx.translate(-this.camera_x, 0);
+    }
 
-        //* Draw() wird immer wieder aufgerufen
+    //* Draw() wird immer wieder aufgerufen
+    requestAnimation() {
         let self = this;
         requestAnimationFrame(function () {
             self.draw();
