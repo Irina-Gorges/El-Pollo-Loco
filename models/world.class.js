@@ -51,21 +51,32 @@ class World {
         }
     }
 
+   
     checkCollisions() {
-        // Collision mit Gegnern
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy)) {
-                // && Character war NICHT über dem gegner
+            if (
+                this.character.isColliding(enemy) &&
+                this.character.speedY > 0 &&
+                this.character.y + this.character.height <= enemy.y + 5
+            ) {
+                // Von oben getroffen
+                enemy.hit();
+                if (enemy.isDead()) {
+                    this.level.enemies = this.level.enemies.filter(
+                        (e) => e !== enemy
+                    );
+                    console.log('Enemy defeated!');
+                }
+                this.character.jump(); // Zurückspringen nach Treffer
+            } else if (this.character.isColliding(enemy)) {
+                // Seitlich oder unten -> Schaden
                 this.character.hit();
                 this.statusBar.setHealth(this.character.energy);
                 console.log(
                     'Collision with Character, energy',
                     this.character.energy
                 );
-
-                //if(character war ÜBER dem gegner){dann gegner töten}
             }
-            // abfrage für throwables + was für ein gegner ist es?
         });
 
         // Collision mit Coins

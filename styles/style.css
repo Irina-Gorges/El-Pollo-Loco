@@ -21,18 +21,19 @@
 }
 
 body {
-    background-image: url('../img/5_background/body_background.jpg');
-    background-size: cover;
-    background-position: center;
-}
-
-main {
+    position: relative;
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-image: url('../img/5_background/body_background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
+
+
 
 #main_Content {
     width: 100%;
@@ -101,7 +102,9 @@ main {
 
 .screens {
     position: absolute;
+    display: flex;
     justify-content: center;
+    align-items: flex-end;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -109,4 +112,38 @@ main {
     width: 720px;
     height: 480px;
     border-radius: 10px;
+}
+
+.StartBtn {
+    display: inline-block;
+    outline: 0;
+    border: 0;
+    cursor: pointer;
+    will-change: box-shadow, transform;
+    background: radial-gradient(100% 100% at 100% 0%, #fceb59 0%, #f3a703 100%);
+    box-shadow: 0px 2px 4px rgba(66, 58, 35, 0.4),
+        0px 7px 13px -3px rgba(66, 63, 35, 0.3),
+        inset 0px -3px 0px rgba(111, 103, 58, 0.5);
+    padding: 0 32px;
+    border-radius: 6px;
+    color: #000000;
+    height: 48px;
+    font-size: 18px;
+    text-shadow: 0 1px 0 rgb(0 0 0 / 40%);
+    transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.StartBtn:hover {
+    box-shadow: 0px 4px 8px rgba(66, 63, 35, 0.4),
+        0px 7px 13px -3px rgba(66, 63, 35, 0.3), inset 0px -2px 0px #fce14b;
+    transform: translateY(-2px);
+}
+
+.StartBtn:active {
+    box-shadow: inset 0px 3px 7px #e0dd3c;
+    transform: translateY(2px);
+}
+
+.d_none {
+    display: none;
 }

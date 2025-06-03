@@ -82,6 +82,7 @@ class MovableObject extends DrawableObject {
         return this.energy == 0;
     }
 
+
     playAnimation(images) {
         this.animationCounter++;
 
