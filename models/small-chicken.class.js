@@ -1,5 +1,5 @@
 class SmallChicken extends MovableObject {
-    //#region Properties
+    //#region Attributs
     x = 260;
     y = 380;
     width = 50;
@@ -20,6 +20,7 @@ class SmallChicken extends MovableObject {
     IMAGES_WALKING = ImageHub.chicken_small.IMAGES_WALKING;
     //#endregion
 
+    //#region Constructor
     constructor() {
         super().loadImage('img/3_enemies_chicken/chicken_small/1_walk/1_w.png');
         this.loadImages(this.IMAGES_WALKING);
@@ -28,9 +29,9 @@ class SmallChicken extends MovableObject {
         IntervalHub.startInterval(this.animate, 1000 / 32, 100 / 5);
         this.getRealFrame();
     }
+    //#endregion
 
-    // ########### Methods ###########
-
+    //#region Methods
     getRealFrame() {
         this.rX = this.x + this.offset.left;
         this.rY = this.y + this.offset.top;
@@ -42,4 +43,5 @@ class SmallChicken extends MovableObject {
         this.moveLeft();
         this.playAnimation(this.IMAGES_WALKING);
     };
+    //#endregion
 }

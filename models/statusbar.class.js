@@ -1,8 +1,11 @@
 class StatusBar extends DrawableObject {
+    //#region Attributes
     IMAGES_STATUS = ImageHub.statusbar.IMAGES_STATUS;
 
     health = 100;
+    //#endregion
 
+    //#region Constructor
     constructor() {
         super();
         this.loadImages(this.IMAGES_STATUS);
@@ -12,7 +15,9 @@ class StatusBar extends DrawableObject {
         this.height = 45;
         this.setHealth(100); // setzt das Anfangsbild der Statusbar ein
     }
+    //#endregion
 
+    //#region Methods
     //* Lebensanzeige
     setHealth(health) {
         this.health = health;
@@ -35,4 +40,5 @@ class StatusBar extends DrawableObject {
             return 0;
         }
     }
+    //#endregion
 }

@@ -1,4 +1,5 @@
 class DrawableObject {
+    //#region Attributes
     img;
     imageCache = [];
     currentImage = 0;
@@ -6,6 +7,7 @@ class DrawableObject {
     y = 70;
     width = 130;
     height = 260;
+    //#endregion
 
     loadImage(path) {
         this.img = new Image();
@@ -55,7 +57,6 @@ class DrawableObject {
             ctx.stroke();
         }
     }
-    //#endregion
 
     /**
      * Calculates the real frame of the Character object.
@@ -72,6 +73,7 @@ class DrawableObject {
         this.rW = this.width - this.offset.left - this.offset.right;
         this.rH = this.height - this.offset.top - this.offset.bottom;
     }
+    //#endregion
 
     /**
      * Loads all images from the given array into the movable object's imageCache.

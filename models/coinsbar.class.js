@@ -3,6 +3,7 @@ class CoinsBar extends DrawableObject {
 
     coins = 0;
 
+    //#region Constructor
     constructor() {
         super();
         this.loadImages(this.IMAGES_COINSB);
@@ -12,7 +13,9 @@ class CoinsBar extends DrawableObject {
         this.height = 45;
         this.setCoins(0); // Setzt das Anfangsbild der Coinsbar ein
     }
+    //#endregion
 
+    //#region Methods
     //* Coinsanzeige
     setCoins(coins) {
         this.coins = coins;
@@ -23,16 +26,17 @@ class CoinsBar extends DrawableObject {
     resolveImageIndex() {
         if (this.coins == 0) {
             return 0;
-        } else if (this.coins > 20) {
+        } else if (this.coins == 1) {
             return 1;
-        } else if (this.coins > 40) {
+        } else if (this.coins == 2) {
             return 2;
-        } else if (this.coins > 60) {
+        } else if (this.coins == 3) {
             return 3;
-        } else if (this.coins > 80) {
+        } else if (this.coins == 4) {
             return 4;
         } else {
             return 5;
         }
     }
+    //#endregion
 }

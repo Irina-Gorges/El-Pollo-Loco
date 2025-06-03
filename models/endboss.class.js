@@ -1,4 +1,5 @@
 class Endboss extends MovableObject {
+    //#region Attributes
     height = 400;
     width = 320;
     y = 60;
@@ -11,7 +12,13 @@ class Endboss extends MovableObject {
     };
 
     IMAGES_WALKING = ImageHub.endboss.IMAGES_WALKING;
+    IMAGES_ALERT = ImageHub.endboss.IMAGES_ALERT;
+    IMAGES_ATTACK = ImageHub.endboss.IMAGES_ATTACK;
+    IMAGES_HURT = ImageHub.endboss.IMAGES_HURT;
+    IMAGES_DEAD = ImageHub.endboss.IMAGES_DEAD;
+    //#endregion
 
+    //#region constructor
     constructor() {
         super().loadImage(this.IMAGES_WALKING[0]);
         this.loadImages(this.IMAGES_WALKING);
@@ -19,6 +26,7 @@ class Endboss extends MovableObject {
         IntervalHub.startInterval(this.animate, 1000 / 5);
         this.getRealFrame();
     }
+    //#endregion
 
     getRealFrame() {
         this.rX = this.x + this.offset.left;

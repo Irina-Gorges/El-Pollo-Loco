@@ -1,5 +1,5 @@
 class MovableObject extends DrawableObject {
-    //#region Properties
+    //#region Attributs
 
     speed = 0.15;
     otherDirection = false; //* der Charakter switcht von links nach rechts
@@ -7,17 +7,17 @@ class MovableObject extends DrawableObject {
     acceleration = 2.2; //* wie schnell fällt der Charakter
     energy = 100; //* die Lebensanzeige des Charakters
     lastHit = 0;
-
     //#endregion
 
-    // ########### Constructor ###########
+    //#region Constructor
     constructor() {
         super();
         this.animationCounter = 0;
         this.animationFrameRate = 4; // Je höher, desto langsamer die Animation
     }
-    // ########### Methods ###########
+    //#endregion
 
+    //#region Methods
     /**
      * Applies gravity to the object.
      *
@@ -106,4 +106,5 @@ class MovableObject extends DrawableObject {
     jump() {
         this.speedY = 30;
     }
+    //#endregion
 }

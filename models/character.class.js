@@ -1,5 +1,5 @@
 class Character extends MovableObject {
-    //#region Properties
+    //#region Attributes
     speed = 5;
     width = 130;
     height = 260;
@@ -24,8 +24,11 @@ class Character extends MovableObject {
     IMAGES_LONG_IDLE = ImageHub.character.IMAGES_LONG_IDLE;
 
     world;
+    coins = 0;
+    bottles = 0;
     //#endregion
 
+    //#region Constructor
     /**
      * Constructor for the Character class.
      *
@@ -52,6 +55,24 @@ class Character extends MovableObject {
         this.throwStartTime = null;
         this.throwDuration = 30; // ms
     }
+    //#endregion
+
+    //#region Methods
+    collectCoin() {
+        this.coins += 1; // Oder den Wert, den ein Coin geben soll
+        if (this.coins > 100) {
+            // Maximalwert für Coins
+            this.coins = 100;
+        }
+    }
+
+    collectBottle() {
+        this.bottles += 1; // Oder den Wert, den eine Bottle geben soll
+        if (this.bottles > 100) {
+            // Maximalwert für Bottles
+            this.bottles = 100;
+        }
+    }
 
     animatSpeedRef() {
         let result = IntervalHub.startInterval(this.animate, 1000 / 20);
@@ -61,7 +82,7 @@ class Character extends MovableObject {
         return result;
     }
 
-    //#region animate
+    //#region Animate
     animate = () => {
         const currentTime = new Date().getTime();
 
@@ -113,5 +134,6 @@ class Character extends MovableObject {
             }
         }
     };
+    //#endregion
     //#endregion
 }

@@ -1,8 +1,18 @@
 class Coin extends DrawableObject {
+    //#region Attributes
     IMAGES_COIN = ImageHub.coin.IMAGES_COIN;
 
     coins = 0;
 
+    offset = {
+        top: 40,
+        right: 40,
+        bottom: 40,
+        left: 40,
+    };
+    //#endregion
+
+    //#region Constructor
     constructor() {
         super();
         this.loadImages(this.IMAGES_COIN);
@@ -11,8 +21,11 @@ class Coin extends DrawableObject {
         this.width = 120;
         this.height = 120;
         this.setCoin(0); // Setzt das Anfangsbild der Coins ein
+        this.getRealFrame();
     }
+    //#endregion
 
+    //#region Methods
     //* Coinanzeige
     setCoin(coin) {
         this.coin = coin;
@@ -20,6 +33,13 @@ class Coin extends DrawableObject {
         this.img = this.imageCache[path];
         this.x = this.x + Math.random() * 2100;
         this.y = this.y + Math.random() * 175;
+    }
+
+    getRealFrame() {
+        this.rX = this.x + this.offset.left;
+        this.rY = this.y + this.offset.top;
+        this.rW = this.width - this.offset.left - this.offset.right;
+        this.rH = this.height - this.offset.top - this.offset.bottom;
     }
 
     resolveImageIndex() {
@@ -37,4 +57,5 @@ class Coin extends DrawableObject {
             return 5;
         }
     }
+    //#endregion
 }

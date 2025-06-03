@@ -9,16 +9,8 @@ class Level {
         new Endboss(),
     ];
     clouds = [new Cloud(), new Cloud(), new Cloud()];
-    coin = [
-        new Coin(),
-        new Coin(),
-        new Coin(),
-        new Coin(),
-        new Coin(),
-        new Coin(),
-    ];
+    coin = [new Coin(), new Coin(), new Coin(), new Coin(), new Coin()];
     bottlesOG = [
-        new SalsaBottles(),
         new SalsaBottles(),
         new SalsaBottles(),
         new SalsaBottles(),

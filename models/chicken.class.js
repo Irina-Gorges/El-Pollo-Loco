@@ -1,5 +1,5 @@
 class Chicken extends MovableObject {
-    //#region Properties
+    //#region Attributes
     x = 260;
     y = 350;
     width = 70;
@@ -20,6 +20,7 @@ class Chicken extends MovableObject {
     IMAGES_WALKING = ImageHub.chicken.IMAGES_WALKING;
     //#endregion
 
+    //#region Constructor
     constructor() {
         super().loadImage(
             'img/3_enemies_chicken/chicken_normal/1_walk/1_w.png'
@@ -30,8 +31,7 @@ class Chicken extends MovableObject {
         IntervalHub.startInterval(this.animate, 1000 / 20, 100 / 5);
         this.getRealFrame();
     }
-
-    // ########### Methods ###########
+    //#endregion
 
     getRealFrame() {
         this.rX = this.x + this.offset.left;

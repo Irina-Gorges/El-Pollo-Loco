@@ -70,12 +70,15 @@ class ImageHub {
             'img/5_background/layers/4_clouds/2.png',
         ],
     };
+
     static chicken = {
         IMAGES_WALKING: [
             'img/3_enemies_chicken/chicken_normal/1_walk/1_w.png',
             'img/3_enemies_chicken/chicken_normal/1_walk/2_w.png',
             'img/3_enemies_chicken/chicken_normal/1_walk/3_w.png',
         ],
+
+        IMAGES_DEAD: ['img/3_enemies_chicken/chicken_normal/2_dead/dead.png'],
     };
 
     static chicken_small = {
@@ -84,6 +87,8 @@ class ImageHub {
             'img/3_enemies_chicken/chicken_small/1_walk/2_w.png',
             'img/3_enemies_chicken/chicken_small/1_walk/3_w.png',
         ],
+
+        IMAGES_DEAD: ['img/3_enemies_chicken/chicken_small/2_dead/dead.png'],
     };
 
     static endboss = {
@@ -97,7 +102,42 @@ class ImageHub {
             'img/4_enemie_boss_chicken/2_alert/G11.png',
             'img/4_enemie_boss_chicken/2_alert/G12.png',
         ],
+
+        IMAGES_ALERT: [
+            'img/4_enemie_boss_chicken/2_alert/G5.png',
+            'img/4_enemie_boss_chicken/2_alert/G6.png',
+            'img/4_enemie_boss_chicken/2_alert/G7.png',
+            'img/4_enemie_boss_chicken/2_alert/G8.png',
+            'img/4_enemie_boss_chicken/2_alert/G9.png',
+            'img/4_enemie_boss_chicken/2_alert/G10.png',
+            'img/4_enemie_boss_chicken/2_alert/G11.png',
+            'img/4_enemie_boss_chicken/2_alert/G12.png',
+        ],
+
+        IMAGES_ATTACK: [
+            'img/4_enemie_boss_chicken/3_attack/G13.png',
+            'img/4_enemie_boss_chicken/3_attack/G14.png',
+            'img/4_enemie_boss_chicken/3_attack/G15.png',
+            'img/4_enemie_boss_chicken/3_attack/G16.png',
+            'img/4_enemie_boss_chicken/3_attack/G17.png',
+            'img/4_enemie_boss_chicken/3_attack/G18.png',
+            'img/4_enemie_boss_chicken/3_attack/G19.png',
+            'img/4_enemie_boss_chicken/3_attack/G20.png',
+        ],
+
+        IMAGES_HURT: [
+            'img/4_enemie_boss_chicken/4_hurt/G21.png',
+            'img/4_enemie_boss_chicken/4_hurt/G22.png',
+            'img/4_enemie_boss_chicken/4_hurt/G23.png',
+        ],
+
+        IMAGES_DEAD: [
+            'img/4_enemie_boss_chicken/4_hurt/G24.png',
+            'img/4_enemie_boss_chicken/4_hurt/G25.png',
+            'img/4_enemie_boss_chicken/4_hurt/G26.png',
+        ],
     };
+
     static statusbar = {
         IMAGES_STATUS: [
             'img/7_statusbars/1_statusbar/2_statusbar_health/green/0.png',
