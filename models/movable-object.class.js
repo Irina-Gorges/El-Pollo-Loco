@@ -3,10 +3,11 @@ class MovableObject extends DrawableObject {
 
     speed = 0.15;
     otherDirection = false; //* der Charakter switcht von links nach rechts
-    speedY = 0; //* der Charakter fällt von oben nach unten
-    acceleration = 2.2; //* wie schnell fällt der Charakter
+    speedY = 0; //* keine Bewegung auf der vertikalen Ebene
+    acceleration = 2; //* beeinflusst die Größe von speedY (Beschleunigung)
     energy = 100; //* die Lebensanzeige des Charakters
     lastHit = 0;
+
     //#endregion
 
     //#region Constructor
@@ -28,10 +29,16 @@ class MovableObject extends DrawableObject {
      * @method applyGravity
      */
     applyGravity = () => {
-        if (this.isAboveGround() || this.speedY > 0) {
+        if (this.speedY > 0) {
             this.y -= this.speedY;
             this.rY -= this.speedY;
             this.speedY -= this.acceleration;
+        } else if (this.isAboveGround()) {
+            this.y -= this.speedY;
+            this.rY -= this.speedY;
+            this.speedY -= this.acceleration;
+        } else {
+            this.speedY = 0;
         }
     };
 
@@ -81,7 +88,6 @@ class MovableObject extends DrawableObject {
     isDead() {
         return this.energy == 0;
     }
-
 
     playAnimation(images) {
         this.animationCounter++;

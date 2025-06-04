@@ -2,6 +2,7 @@ class Character extends MovableObject {
     //#region Attributes
     speed = 5;
     width = 130;
+    y = 175;
     height = 260;
 
     rX;
@@ -45,7 +46,7 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_JUMPING);
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_HURT);
-        IntervalHub.startInterval(this.applyGravity, 1000 / 25);
+        IntervalHub.startInterval(this.applyGravity, 1000 / 40);
         this.animatSpeedRef();
         this.getRealFrame();
         this.lastMoveTime = new Date().getTime();

@@ -51,16 +51,16 @@ class World {
         }
     }
 
-   
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
             if (
                 this.character.isColliding(enemy) &&
-                this.character.speedY > 0 &&
-                this.character.y + this.character.height <= enemy.y + 5
+                this.character.speedY != 0
             ) {
                 // Von oben getroffen
                 enemy.hit();
+                console.log('boing');
+
                 if (enemy.isDead()) {
                     this.level.enemies = this.level.enemies.filter(
                         (e) => e !== enemy
@@ -107,9 +107,8 @@ class World {
 
                 // Prüfen, ob die Flasche nicht zerbrochen ist und mit einem Gegner kollidiert
                 if (!bottle.isBroken && bottle.isColliding(enemy)) {
-                    enemy.hit(); // Annahme: Gegner hat eine hit() Methode
-                    bottle.break(); // Flasche zerbrechen lassen
-                    // Optional: Gegner aus dem Spiel entfernen, wenn er keine Energie mehr hat
+                    enemy.hit();
+                    bottle.break();
                     if (enemy.isDead()) {
                         this.level.enemies.splice(j, 1); // Gegner aus dem Level entfernen
                     }
@@ -193,7 +192,7 @@ class World {
             this.flipImageBack(mo);
         }
         //* Rahmen drum herum malen für Collission
-        mo.drawFrame(this.ctx);
+        // mo.drawFrame(this.ctx);
         mo.drawRedFrame(this.ctx);
     }
     //#endregion

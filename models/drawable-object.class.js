@@ -1,12 +1,14 @@
 class DrawableObject {
     //#region Attributes
+
     img;
     imageCache = [];
     currentImage = 0;
     x = 120;
-    y = 70;
+    // y = 70;
     width = 130;
     height = 260;
+
     //#endregion
 
     loadImage(path) {
@@ -26,15 +28,15 @@ class DrawableObject {
      */
 
     //* Rahmen drum herum malen für Collission
-    drawFrame(ctx) {
-        if (this instanceof Character || this instanceof Chicken) {
-            ctx.beginPath();
-            ctx.lineWidth = '3';
-            ctx.strokeStyle = 'blue';
-            ctx.rect(this.x, this.y, this.width, this.height);
-            ctx.stroke();
-        }
-    }
+    // drawFrame(ctx) {
+    //     if (this instanceof Character || this instanceof Chicken) {
+    //         ctx.beginPath();
+    //         ctx.lineWidth = '3';
+    //         ctx.strokeStyle = 'blue';
+    //         ctx.rect(this.x, this.y, this.width, this.height);
+    //         ctx.stroke();
+    //     }
+    // }
 
     /**
      * Zeichnet einen roten Rahmen um das MovableObject

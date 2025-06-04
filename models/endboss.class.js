@@ -28,13 +28,6 @@ class Endboss extends MovableObject {
     }
     //#endregion
 
-    getRealFrame() {
-        this.rX = this.x + this.offset.left;
-        this.rY = this.y + this.offset.top;
-        this.rW = this.width - this.offset.left - this.offset.right;
-        this.rH = this.height - this.offset.top - this.offset.bottom;
-    }
-
     animate = () => {
         this.playAnimation(this.IMAGES_WALKING);
     };
