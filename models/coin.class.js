@@ -35,13 +35,6 @@ class Coin extends DrawableObject {
         this.y = this.y + Math.random() * 175;
     }
 
-    getRealFrame() {
-        this.rX = this.x + this.offset.left;
-        this.rY = this.y + this.offset.top;
-        this.rW = this.width - this.offset.left - this.offset.right;
-        this.rH = this.height - this.offset.top - this.offset.bottom;
-    }
-
     resolveImageIndex() {
         if (this.coins == 0) {
             return 0;

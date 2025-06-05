@@ -214,3 +214,92 @@ class IntervalHub {
         IntervalHub.allIntervalls.forEach(clearInterval);
     }
 }
+
+class AudioHub {
+    static backgroundMusic = {
+        AUDIO_BACKGROUND: ['audio/background-music.mp3'],
+    };
+
+    static bottleSounds = {
+        AUDIO_COLLECTBOTTLE: ['audio/bottle.mp3'],
+
+        AUDIO_BOTTLEBREAK: ['audio/bottle-break.mp3'],
+
+        AUDIO_BOTTLETHROW: ['audio/throw.mp3'],
+    };
+
+    static coinSounds = {
+        AUDIO_COLLECTCOINS: ['audio/collect-coin-2.mp3'],
+    };
+
+    static characterSounds = {
+        AUDIO_CHARACTER_DIE: ['audio/character-die.mp3'],
+
+        AUDIO_CHARACTER_HURT: ['audio/hurt.mp3'],
+
+        AUDIO_CHARACTER_JUMP: ['audio/jumping.mp3'],
+
+        AUDIO_CHARACTER_RUN: ['audio/running.mp3'],
+
+        AUDIO_CHARACTER_SNORING: ['audio/snoring.mp3'],
+    };
+
+    static chickenSounds = {
+        AUDIO_CHICKENSOUND: ['audio/chicken.mp3'],
+
+        AUDIO_CHICKEN_SMALL_SOUND: ['audio/chickenSmall.mp3'],
+    };
+
+    static endbossSounds = {
+        AUDIO_ENDBOSS_DIE: ['audio/endboss-die.mp3'],
+
+        AUDIO_ENDBOSS_SOUND: ['audio/endboss-sound.mp3'],
+    };
+
+    static gameSounds = {
+        AUDIO_GAMEWIN: ['audio/win.mp3'],
+
+        AUDIO_GAMELOST: ['audio/lose.mp3'],
+    };
+
+    static settingsKey = 'audio_settings';
+
+    static defaultSettings = {
+        volume: 0.1,
+        muted: false,
+    };
+
+    static getSettings() {
+        const settings = localStorage.getItem(this.settingsKey);
+        try {
+            return settings ? JSON.parse(settings) : this.defaultSettings;
+        } catch (e) {
+            console.warn('Fehler beim Parsen der Audio-Einstellungen:', e);
+            return this.defaultSettings;
+        }
+    }
+
+    static saveSettings(settings) {
+        localStorage.setItem(this.settingsKey, JSON.stringify(settings));
+    }
+
+    static setVolume(newVolume) {
+        const settings = this.getSettings();
+        settings.volume = Math.min(1, Math.max(0, newVolume)); // Clamp 0–1
+        this.saveSettings(settings);
+    }
+
+    static toggleMute() {
+        const settings = this.getSettings();
+        settings.muted = !settings.muted;
+        this.saveSettings(settings);
+    }
+
+    static applySettingsTo(audioElement) {
+        const settings = this.getSettings();
+        if (audioElement) {
+            audioElement.volume = settings.volume;
+            audioElement.muted = settings.muted;
+        }
+    }
+}

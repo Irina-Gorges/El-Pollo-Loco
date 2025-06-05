@@ -52,70 +52,76 @@ class World {
     }
 
     checkCollisions() {
+        this.checkEnemyCollisions();
+        this.checkCoinCollisions();
+        this.checkBottlePickups();
+        this.checkThrowObjects();
+    }
+
+    checkEnemyCollisions() {
         this.level.enemies.forEach((enemy) => {
             if (
                 this.character.isColliding(enemy) &&
                 this.character.speedY != 0
             ) {
-                // Von oben getroffen
-                enemy.hit();
-                console.log('boing');
-
-                if (enemy.isDead()) {
-                    this.level.enemies = this.level.enemies.filter(
-                        (e) => e !== enemy
-                    );
-                    console.log('Enemy defeated!');
-                }
-                this.character.jump(); // Zurückspringen nach Treffer
+                this.handleEnemyJumpCollision(enemy);
             } else if (this.character.isColliding(enemy)) {
-                // Seitlich oder unten -> Schaden
-                this.character.hit();
-                this.statusBar.setHealth(this.character.energy);
-                console.log(
-                    'Collision with Character, energy',
-                    this.character.energy
-                );
+                this.handleEnemySideCollision();
             }
         });
+    }
 
-        // Collision mit Coins
+    handleEnemyJumpCollision(enemy) {
+        enemy.hit();
+        console.log('boing');
+
+        if (enemy.isDead()) {
+            this.removeEnemy(enemy);
+            console.log('Enemy defeated!');
+        }
+
+        this.character.jump();
+    }
+
+    handleEnemySideCollision() {
+        this.character.hit();
+        this.statusBar.setHealth(this.character.energy);
+        console.log('Collision with Character, energy', this.character.energy);
+    }
+
+    removeEnemy(enemy) {
+        this.level.enemies = this.level.enemies.filter((e) => e !== enemy);
+    }
+
+    checkCoinCollisions() {
         this.level.coin.forEach((coin, index) => {
             if (this.character.isColliding(coin)) {
-                this.character.collectCoin(); // Sammelt den Coin im Character
-                this.coinsBar.setCoins(this.character.coins); // Aktualisiert die CoinsBar
-                this.level.coin.splice(index, 1); // Entfernt den Coin aus dem Level
+                this.character.collectCoin();
+                this.coinsBar.setCoins(this.character.coins);
+                this.level.coin.splice(index, 1);
             }
         });
+    }
 
-        // Collision mit SalsaBottles
+    checkBottlePickups() {
         this.level.bottlesOG.forEach((bottle, index) => {
             if (this.character.isColliding(bottle)) {
-                this.character.collectBottle(); // Sammelt die Bottle im Character
-                this.bottleBar.setBottles(this.character.bottles); // Aktualisiert die BottleBar
-                this.level.bottlesOG.splice(index, 1); // Entfernt die Bottle aus dem Level
+                this.character.collectBottle();
+                this.bottleBar.setBottles(this.character.bottles);
+                this.level.bottlesOG.splice(index, 1);
             }
         });
+    }
 
-        // Iteriert über alle aktuell geworfenen Flaschen
-        for (let i = this.throwableObjects.length - 1; i >= 0; i--) {
-            const bottle = this.throwableObjects[i];
-
-            // Iteriert über alle Gegner im Level
-            for (let j = this.level.enemies.length - 1; j >= 0; j--) {
-                const enemy = this.level.enemies[j];
-
-                // Prüfen, ob die Flasche nicht zerbrochen ist und mit einem Gegner kollidiert
-                if (!bottle.isBroken && bottle.isColliding(enemy)) {
-                    enemy.hit();
-                    bottle.break();
-                    if (enemy.isDead()) {
-                        this.level.enemies.splice(j, 1); // Gegner aus dem Level entfernen
-                    }
-                }
-            }
+    handleBottleHitEnemy(bottle, enemy, enemyIndex) {
+        enemy.hit();
+        bottle.break();
+        if (enemy.isDead()) {
+            this.level.enemies.splice(enemyIndex, 1);
+            
         }
     }
+
     //#endregion
 
     //#region Draw

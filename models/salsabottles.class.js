@@ -25,14 +25,8 @@ class SalsaBottles extends DrawableObject {
     }
     //#endregion
 
-    getRealFrame() {
-        this.rX = this.x + this.offset.left;
-        this.rY = this.y + this.offset.top;
-        this.rW = this.width - this.offset.left - this.offset.right;
-        this.rH = this.height - this.offset.top - this.offset.bottom;
-    }
-
-    //* Coinanzeige
+    //#region Methods
+    //* Bottleanzeige
     setBottlesOG(bottlesOG) {
         this.bottlesOG = bottlesOG;
         let path = this.IMAGES_SALSABOTTLES[this.bottlesOG];
@@ -46,4 +40,6 @@ class SalsaBottles extends DrawableObject {
         result = Math.random() < 0.5 ? 0 : 1;
         return result;
     }
+
+    //#endregion
 }

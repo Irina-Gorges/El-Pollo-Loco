@@ -32,12 +32,13 @@ class ThrowableObject extends MovableObject {
     //#region Methods
     throw = () => {
         if (!this.hasBeenThrown) {
-            this.speedY = 22;
+            this.speedY = 20;
             this.hasBeenThrown = true;
+            this.bottlebar.bottles -=1;
         }
 
         if (!this.isBroken) {
-            this.x += 18;
+            this.x += 15;
             this.playAnimation(this.IMAGES_THROW);
 
             // Prüfen, ob am Boden

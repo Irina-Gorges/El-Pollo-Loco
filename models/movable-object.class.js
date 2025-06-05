@@ -7,6 +7,7 @@ class MovableObject extends DrawableObject {
     acceleration = 2; //* beeinflusst die Größe von speedY (Beschleunigung)
     energy = 100; //* die Lebensanzeige des Charakters
     lastHit = 0;
+    damage = 0;
 
     //#endregion
 
@@ -111,7 +112,8 @@ class MovableObject extends DrawableObject {
     }
 
     jump() {
-        this.speedY = 30;
+        this.speedY = 27;
     }
+
     //#endregion
 }
