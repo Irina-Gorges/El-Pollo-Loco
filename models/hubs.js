@@ -1,4 +1,9 @@
 //#region Images
+
+/**
+ * Stores image paths for game assets, organized by entity and animation type.
+ * Provides easy access to character, enemy, background, and UI images.
+ */
 class ImageHub {
     static character = {
         IMAGES_WALKING: [
@@ -220,6 +225,12 @@ class IntervalHub {
 //#endregion
 
 //#region Audio & Controls
+
+/**
+ * AudioHub manages all audio asset paths and user audio settings.
+ * It organizes sounds by category and provides methods to get, save,
+ * and apply audio settings like volume and mute status.
+ */
 class AudioHub {
     static backgroundMusic = {
         AUDIO_BACKGROUND: ['audio/background-music.mp3'],

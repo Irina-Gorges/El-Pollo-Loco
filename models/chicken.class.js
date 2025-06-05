@@ -22,6 +22,13 @@ class Chicken extends MovableObject {
     //#endregion
 
     //#region Constructor
+    /**
+     * Creates a new instance of the enemy character.
+     * Loads the initial walk image and animation image sets (walking and dead).
+     * Sets a random horizontal starting position and speed.
+     * Starts the animation interval for this character.
+     * Initializes the current animation frame.
+     */
     constructor() {
         super().loadImage(
             'img/3_enemies_chicken/chicken_normal/1_walk/1_w.png'
@@ -35,6 +42,10 @@ class Chicken extends MovableObject {
     }
     //#endregion
 
+    /**
+     * Animates the enemy character by moving it left and playing the walking animation.
+     * This method is called repeatedly at a fixed interval.
+     */
     animate = () => {
         this.moveLeft();
         this.playAnimation(this.IMAGES_WALKING);

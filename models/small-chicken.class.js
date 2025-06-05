@@ -1,3 +1,10 @@
+/**
+ * Class representing a small chicken enemy.
+ * Extends MovableObject and includes properties for position, size,
+ * animations, and movement behavior.
+ *
+ * @extends MovableObject
+ */
 class SmallChicken extends MovableObject {
     //#region Attributs
     x = 260;
@@ -22,6 +29,10 @@ class SmallChicken extends MovableObject {
     //#endregion
 
     //#region Constructor
+    /**
+     * Creates a new SmallChicken instance.
+     * Initializes position, speed, and animation intervals.
+     */
     constructor() {
         super().loadImage('img/3_enemies_chicken/chicken_small/1_walk/1_w.png');
         this.loadImages(this.IMAGES_WALKING);
@@ -38,6 +49,9 @@ class SmallChicken extends MovableObject {
 
     //#region Methods
 
+    /**
+     * Animation loop: moves the chicken left and plays walking animation.
+     */
     animate = () => {
         this.moveLeft();
         this.playAnimation(this.IMAGES_WALKING);

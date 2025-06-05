@@ -6,6 +6,11 @@ class BottleBar extends DrawableObject {
     //#endregion
 
     //#region Constructor
+    /**
+     * Creates a new instance of the Bottles bar.
+     * Loads the bottle images, sets position and size.
+     * Initializes the displayed image to 0 bottles.
+     */
     constructor() {
         super();
         this.loadImages(this.IMAGES_BOTTLESB);
@@ -18,6 +23,10 @@ class BottleBar extends DrawableObject {
     //#endregion
 
     //#region Methods
+    /**
+     * Sets the number of bottles and updates the displayed image accordingly.
+     * @param {number} bottles - The number of bottles (0 to 5).
+     */
     //* Bottlesanzeige
     setBottles(bottles) {
         this.bottles = bottles;
@@ -25,6 +34,11 @@ class BottleBar extends DrawableObject {
         this.img = this.imageCache[path];
     }
 
+    /**
+     * Determines the image index corresponding to the current number of bottles.
+     * Returns a value from 0 to 5.
+     * @returns {number} The index of the image in IMAGES_BOTTLESB.
+     */
     resolveImageIndex() {
         if (this.bottles == 0) {
             return 0;

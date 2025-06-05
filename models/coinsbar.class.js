@@ -4,6 +4,11 @@ class CoinsBar extends DrawableObject {
     coins = 0;
 
     //#region Constructor
+    /**
+     * Class constructor.
+     * Loads the coin bar images, sets the initial position and size of the object,
+     * and initializes the coin bar display to 0.
+     */
     constructor() {
         super();
         this.loadImages(this.IMAGES_COINSB);
@@ -17,12 +22,22 @@ class CoinsBar extends DrawableObject {
 
     //#region Methods
     //* Coinsanzeige
+    /**
+     * Sets the current number of coins and updates the displayed image accordingly.
+     *
+     * @param {number} coins - The current number of coins to display.
+     */
     setCoins(coins) {
         this.coins = coins;
         let path = this.IMAGES_COINSB[this.resolveImageIndex()];
         this.img = this.imageCache[path];
     }
 
+    /**
+     * Determines the index of the image to display based on the current coin count.
+     *
+     * @returns {number} The index of the image in IMAGES_COINSB corresponding to the coin count.
+     */
     resolveImageIndex() {
         if (this.coins == 0) {
             return 0;

@@ -1,7 +1,29 @@
+/**
+ * @fileoverview Initializes the game canvas, handles keyboard input and audio playback.
+ */
+
+/**
+ * The canvas element for rendering the game.
+ * @type {HTMLCanvasElement}
+ */
 let canvas;
+
+/**
+ * The game world instance.
+ * @type {World}
+ */
 let world;
+
+/**
+ * Keyboard input state for controlling the character.
+ * @type {Keyboard}
+ */
 let keyboard = new Keyboard();
 
+/**
+ * Initializes the canvas and game world, and gets the drawing context.
+ * Called when the game starts.
+ */
 function init() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
@@ -10,6 +32,10 @@ function init() {
     console.log('My Character is', world.character);
 }
 
+/**
+ * Background music audio element.
+ * @type {HTMLAudioElement}
+ */
 const bgMusic = new Audio(AudioHub.backgroundMusic.AUDIO_BACKGROUND[0]);
 bgMusic.loop = true;
 
@@ -46,6 +72,10 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    /**
+     * Updates the mute button icon based on mute state.
+     * @param {boolean} muted - Whether audio is muted.
+     */
     function updateMuteButton(muted) {
         const btn = document.getElementById('muteBtn');
         btn.textContent = muted ? '🔊' : '🔇';
@@ -54,6 +84,11 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+/**
+ * Keyboard key down event listener for controlling the character.
+ * Sets the corresponding key state in the keyboard object.
+ * @param {KeyboardEvent} event
+ */
 window.addEventListener('keydown', (event) => {
     if (event.code == 'KeyD') {
         keyboard.RIGHT = true;
@@ -81,6 +116,11 @@ window.addEventListener('keydown', (event) => {
     console.log(event);
 });
 
+/**
+ * Keyboard key up event listener for controlling the character.
+ * Resets the corresponding key state in the keyboard object.
+ * @param {KeyboardEvent} event
+ */
 window.addEventListener('keyup', (event) => {
     if (event.code == 'KeyD') {
         keyboard.RIGHT = false;

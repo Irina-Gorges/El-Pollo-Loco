@@ -1,4 +1,13 @@
+/**
+ * @class Level
+ * @classdesc Represents a level in the game, containing enemies, collectibles, background objects, and level configuration.
+ */
 class Level {
+    /**
+     * A list of enemy objects in the level.
+     * Includes regular Chickens, Small Chickens, and the Endboss.
+     * @type {(Chicken|SmallChicken|Endboss)[]}
+     */
     enemies = [
         new Chicken(),
         new Chicken(),
@@ -17,6 +26,12 @@ class Level {
         new SalsaBottles(),
         new SalsaBottles(),
     ];
+
+    /**
+     * A list of background objects used to create parallax scrolling effects.
+     * Each object includes an image path and an x-position.
+     * @type {BackgroundObject[]}
+     */
     backgroundObjects = [
         new BackgroundObject('img/5_background/layers/air.png', -719),
         new BackgroundObject(
@@ -76,5 +91,9 @@ class Level {
         ),
     ];
 
+    /**
+     * The x-coordinate at which the level ends.
+     * @type {number}
+     */
     level_end_x = 2250;
 }

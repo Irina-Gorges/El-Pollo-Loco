@@ -46,7 +46,7 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_JUMPING);
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_HURT);
-        IntervalHub.startInterval(this.applyGravity, 1000 / 40);
+        IntervalHub.startInterval(this.applyGravity, 1000 / 60);
         this.animatSpeedRef();
         this.getRealFrame();
         this.lastMoveTime = new Date().getTime();
@@ -59,6 +59,11 @@ class Character extends MovableObject {
     //#endregion
 
     //#region Methods
+
+    /**
+     * Increases the number of collected coins by 1.
+     * The maximum amount is limited to 100.
+     */
     collectCoin() {
         this.coins += 1; // Oder den Wert, den ein Coin geben soll
         if (this.coins > 100) {
@@ -67,6 +72,10 @@ class Character extends MovableObject {
         }
     }
 
+    /**
+     * Increases the number of collected bottles by 1.
+     * The maximum amount is limited to 5.
+     */
     collectBottle() {
         this.bottles += 1; // Oder den Wert, den eine Bottle geben soll
         if (this.bottles > 5) {
@@ -75,11 +84,21 @@ class Character extends MovableObject {
         }
     }
 
+    /**
+     * Decreases the number of bottles by 1 if at least one is available.
+     */
     decreaseBottle() {
         if (this.bottles > 0) {
             this.bottles--;
         }
     }
+
+    /**
+     * Starts the animation speed using intervals.
+     * If the object is not "dead", the animation is restarted.
+     *
+     * @returns {number} - The ID of the started interval.
+     */
 
     animatSpeedRef() {
         let result = IntervalHub.startInterval(this.animate, 1000 / 20);
@@ -89,6 +108,10 @@ class Character extends MovableObject {
         return result;
     }
 
+    /**
+     * Updates the movement and animation of the player character based on input and state.
+     * Moves the character, adjusts the camera, and plays the appropriate animation (running, jumping, idle, etc.).
+     */
     //#region Animate
     animate = () => {
         const currentTime = new Date().getTime();

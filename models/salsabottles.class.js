@@ -13,6 +13,12 @@ class SalsaBottles extends DrawableObject {
     //#endregion
 
     //#region Constructor
+    /**
+     * Class constructor.
+     * Loads the salsa bottle images, sets the initial position and size,
+     * initializes the bottle display with a random image (index 0 or 1),
+     * and updates the current frame.
+     */
     constructor() {
         super();
         this.loadImages(this.IMAGES_SALSABOTTLES);
@@ -27,6 +33,12 @@ class SalsaBottles extends DrawableObject {
 
     //#region Methods
     //* Bottleanzeige
+    /**
+     * Sets the current bottle image based on the given index,
+     * updates the displayed image, and randomly adjusts the position.
+     *
+     * @param {number} bottlesOG - Index of the bottle image to display (typically 0 or 1).
+     */
     setBottlesOG(bottlesOG) {
         this.bottlesOG = bottlesOG;
         let path = this.IMAGES_SALSABOTTLES[this.bottlesOG];
@@ -35,6 +47,12 @@ class SalsaBottles extends DrawableObject {
         this.y = this.y + Math.random() * 5;
     }
 
+    /**
+     * Returns a random integer 0 or 1.
+     * Used to randomly select one of two bottle images.
+     *
+     * @returns {number} Either 0 or 1, chosen randomly.
+     */
     getRandom1Or2() {
         let result;
         result = Math.random() < 0.5 ? 0 : 1;

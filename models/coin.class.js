@@ -13,6 +13,11 @@ class Coin extends DrawableObject {
     //#endregion
 
     //#region Constructor
+    /**
+     * Class constructor.
+     * Loads the coin images, sets the initial position and size of the object,
+     * initializes the coin display to 0, and determines the current frame.
+     */
     constructor() {
         super();
         this.loadImages(this.IMAGES_COIN);
@@ -26,6 +31,12 @@ class Coin extends DrawableObject {
     //#endregion
 
     //#region Methods
+    /**
+     * Sets the current coin amount and updates the displayed image.
+     * The coin's position is randomly shifted within specified ranges.
+     *
+     * @param {number} coin - The amount of coins to set.
+     */
     //* Coinanzeige
     setCoin(coin) {
         this.coin = coin;
@@ -35,6 +46,11 @@ class Coin extends DrawableObject {
         this.y = this.y + Math.random() * 175;
     }
 
+    /**
+     * Determines the index of the image to display based on the current coin amount.
+     *
+     * @returns {number} The index of the image in IMAGES_COIN corresponding to the coin amount.
+     */
     resolveImageIndex() {
         if (this.coins == 0) {
             return 0;

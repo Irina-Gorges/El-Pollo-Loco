@@ -90,6 +90,12 @@ class MovableObject extends DrawableObject {
         return this.energy == 0;
     }
 
+    /**
+     * Plays an animation by cycling through an array of image paths.
+     * Updates the displayed image at a rate defined by `animationFrameRate`.
+     *
+     * @param {string[]} images - Array of image paths representing animation frames.
+     */
     playAnimation(images) {
         this.animationCounter++;
 

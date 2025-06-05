@@ -1,3 +1,7 @@
+/**
+ * Represents the game world, managing the main character, level, UI bars, and interactions like collisions and throwing objects.
+ */
+
 class World {
     //#region Attributes
     character = new Character();
@@ -24,34 +28,27 @@ class World {
     }
     //#endregion
 
+    /**
+     * Sets a reference to this world inside the character.
+     */
     //#region Methods
     setWorld() {
         this.character.world = this;
     }
 
+    /**
+     * Main game loop logic, executed periodically.
+     */
     run = () => {
         this.checkCollisions();
         this.checkThrowObjects();
     };
 
     //#region Collisions
-    // Checkt ob eine Kollission stattfindet
-    // checkThrowObjects() {
-    //     if (this.keyboard.THROW && !this.character.isThrowing) {
-    //         const bottle = new ThrowableObject(
-    //             this.character.x + 100,
-    //             this.character.y + 100
-    //         );
-    //         this.throwableObjects.push(bottle);
-    //         this.bottleBar.decreaseBottles();
 
-    //         // Flag aktivieren und Zeit setzen
-    //         this.character.isThrowing = true;
-    //         this.character.throwStartTime = new Date().getTime();
-    //         this.character.lastMoveTime = this.character.throwStartTime;
-    //     }
-    // }
-
+    /**
+     * Checks if the player has thrown a bottle and processes the logic.
+     */
     checkThrowObjects() {
         if (
             this.keyboard.THROW &&
@@ -77,6 +74,9 @@ class World {
         }
     }
 
+    /**
+     * Checks all collision types (enemies, coins, bottles, and throwables).
+     */
     checkCollisions() {
         this.checkEnemyCollisions();
         this.checkCoinCollisions();
@@ -84,6 +84,9 @@ class World {
         this.checkThrowObjects();
     }
 
+    /**
+     * Handles collisions between the character and enemies.
+     */
     checkEnemyCollisions() {
         this.level.enemies.forEach((enemy) => {
             if (
@@ -97,6 +100,10 @@ class World {
         });
     }
 
+    /**
+     * Handles the logic when the character jumps on an enemy.
+     * @param {Enemy} enemy - The enemy object being jumped on.
+     */
     handleEnemyJumpCollision(enemy) {
         enemy.hit();
         console.log('boing');
@@ -109,16 +116,26 @@ class World {
         this.character.jump();
     }
 
+    /**
+     * Handles side collision with an enemy.
+     */
     handleEnemySideCollision() {
         this.character.hit();
         this.statusBar.setHealth(this.character.energy);
         console.log('Collision with Character, energy', this.character.energy);
     }
 
+    /**
+     * Removes an enemy from the level.
+     * @param {Enemy} enemy - The enemy to be removed.
+     */
     removeEnemy(enemy) {
         this.level.enemies = this.level.enemies.filter((e) => e !== enemy);
     }
 
+    /**
+     * Checks if the character has collected any coins.
+     */
     checkCoinCollisions() {
         this.level.coin.forEach((coin, index) => {
             if (this.character.isColliding(coin)) {
@@ -129,6 +146,9 @@ class World {
         });
     }
 
+    /**
+     * Checks if the character picks up any bottles.
+     */
     checkBottlePickups() {
         this.level.bottlesOG.forEach((bottle, index) => {
             if (this.character.isColliding(bottle)) {
@@ -139,6 +159,12 @@ class World {
         });
     }
 
+    /**
+     * Handles the logic when a thrown bottle hits an enemy.
+     * @param {ThrowableObject} bottle - The thrown bottle.
+     * @param {Enemy} enemy - The enemy being hit.
+     * @param {number} enemyIndex - The index of the enemy in the enemies array.
+     */
     handleBottleHitEnemy(bottle, enemy, enemyIndex) {
         enemy.hit();
         bottle.break();

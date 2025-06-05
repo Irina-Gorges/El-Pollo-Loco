@@ -28,7 +28,14 @@ class Endboss extends MovableObject {
     }
     //#endregion
 
+    //#region Methods
+
+    
+
+
+
     animate = () => {
         this.playAnimation(this.IMAGES_WALKING);
     };
+    //#endregion
 }

@@ -1,20 +1,56 @@
+/**
+ * Class representing a throwable object that can move and break.
+ * Inherits from MovableObject.
+ */
 class ThrowableObject extends MovableObject {
     //#region Attributes
+    /**
+     * Width of the object in pixels.
+     * @type {number}
+     */
     width = 70;
+    /**
+     * Height of the object in pixels.
+     * @type {number}
+     */
     height = 70;
 
+    /**
+     * Offset values used for collision detection.
+     * @type {{top: number, right: number, bottom: number, left: number}}
+     */
     offset = {
         top: 0,
         right: 20,
         bottom: 0,
         left: 20,
     };
+
+    /**
+     * Reference to the bottle object (likely assigned later).
+     * @type {*}
+     */
     bottle;
+    /**
+     * Array of images used for the throwing animation.
+     * @type {string[]}
+     */
     IMAGES_THROW = ImageHub.bottles.IMAGES_THROW;
+    /**
+     * Array of images used for the splash/break animation.
+     * @type {string[]}
+     */
     IMAGES_SPLASH = ImageHub.bottles.IMAGES_SPLASH;
     //#endregion
 
     //#region Constructor
+    /**
+     * Creates a new throwable object at the given (x, y) coordinates.
+     * Loads base and animation images, and starts gravity and throw intervals.
+     *
+     * @param {number} x - The horizontal starting position.
+     * @param {number} y - The vertical starting position.
+     */
     constructor(x, y) {
         super().loadImage('img/6_salsa_bottle/salsa_bottle.png');
         this.loadImages(this.IMAGES_THROW);
@@ -30,6 +66,12 @@ class ThrowableObject extends MovableObject {
     //#endregion
 
     //#region Methods
+    /**
+     * Executes the throw action:
+     * Initializes the throw movement, moves the object to the right,
+     * plays the throw animation, and checks if the object hits the ground
+     * to break it.
+     */
     throw = () => {
         if (!this.hasBeenThrown) {
             this.speedY = 20;
@@ -48,6 +90,9 @@ class ThrowableObject extends MovableObject {
         }
     };
 
+    /**
+     * Sets the object as broken and changes the displayed image to the splash.
+     */
     break = () => {
         this.isBroken = true;
         this.img = this.imageCache[this.IMAGES_SPLASH[0]];
