@@ -36,15 +36,41 @@ class World {
 
     //#region Collisions
     // Checkt ob eine Kollission stattfindet
+    // checkThrowObjects() {
+    //     if (this.keyboard.THROW && !this.character.isThrowing) {
+    //         const bottle = new ThrowableObject(
+    //             this.character.x + 100,
+    //             this.character.y + 100
+    //         );
+    //         this.throwableObjects.push(bottle);
+    //         this.bottleBar.decreaseBottles();
+
+    //         // Flag aktivieren und Zeit setzen
+    //         this.character.isThrowing = true;
+    //         this.character.throwStartTime = new Date().getTime();
+    //         this.character.lastMoveTime = this.character.throwStartTime;
+    //     }
+    // }
+
     checkThrowObjects() {
-        if (this.keyboard.THROW && !this.character.isThrowing) {
+        if (
+            this.keyboard.THROW &&
+            !this.character.isThrowing &&
+            this.character.bottles > 0
+        ) {
             const bottle = new ThrowableObject(
                 this.character.x + 100,
                 this.character.y + 100
             );
             this.throwableObjects.push(bottle);
 
-            // Flag aktivieren und Zeit setzen
+            //  Flasche aus Inventar entfernen (Charakter-Logik)
+            this.character.decreaseBottle();
+
+            //  Anzeige aktualisieren (UI)
+            this.bottleBar.setBottles(this.character.bottles);
+
+            // Wurfstatus setzen
             this.character.isThrowing = true;
             this.character.throwStartTime = new Date().getTime();
             this.character.lastMoveTime = this.character.throwStartTime;
@@ -118,7 +144,6 @@ class World {
         bottle.break();
         if (enemy.isDead()) {
             this.level.enemies.splice(enemyIndex, 1);
-            
         }
     }
 

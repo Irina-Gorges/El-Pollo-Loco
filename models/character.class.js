@@ -46,7 +46,7 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_JUMPING);
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_HURT);
-        IntervalHub.startInterval(this.applyGravity, 1000 / 30);
+        IntervalHub.startInterval(this.applyGravity, 1000 / 40);
         this.animatSpeedRef();
         this.getRealFrame();
         this.lastMoveTime = new Date().getTime();
@@ -69,9 +69,15 @@ class Character extends MovableObject {
 
     collectBottle() {
         this.bottles += 1; // Oder den Wert, den eine Bottle geben soll
-        if (this.bottles > 100) {
+        if (this.bottles > 5) {
             // Maximalwert für Bottles
-            this.bottles = 100;
+            this.bottles = 5;
+        }
+    }
+
+    decreaseBottle() {
+        if (this.bottles > 0) {
+            this.bottles--;
         }
     }
 

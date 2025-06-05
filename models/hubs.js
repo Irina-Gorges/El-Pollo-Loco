@@ -1,3 +1,4 @@
+//#region Images
 class ImageHub {
     static character = {
         IMAGES_WALKING: [
@@ -200,7 +201,9 @@ class ImageHub {
         IMAGES_COIN: ['img/8_coin/coin_1.png', 'img/8_coin/coin_2.png'],
     };
 }
+//#endregion
 
+//#region Invervals Start/Stop
 /**
  * setInterval Start & Stop
  */
@@ -214,7 +217,9 @@ class IntervalHub {
         IntervalHub.allIntervalls.forEach(clearInterval);
     }
 }
+//#endregion
 
+//#region Audio & Controls
 class AudioHub {
     static backgroundMusic = {
         AUDIO_BACKGROUND: ['audio/background-music.mp3'],
@@ -303,3 +308,4 @@ class AudioHub {
         }
     }
 }
+//#endregion

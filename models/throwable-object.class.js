@@ -34,7 +34,6 @@ class ThrowableObject extends MovableObject {
         if (!this.hasBeenThrown) {
             this.speedY = 20;
             this.hasBeenThrown = true;
-            this.bottlebar.bottles -=1;
         }
 
         if (!this.isBroken) {
