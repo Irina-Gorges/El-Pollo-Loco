@@ -3,6 +3,7 @@ class Endboss extends MovableObject {
     height = 400;
     width = 320;
     y = 60;
+    energy = 10;
 
     offset = {
         top: 65,
@@ -16,6 +17,9 @@ class Endboss extends MovableObject {
     IMAGES_ATTACK = ImageHub.endboss.IMAGES_ATTACK;
     IMAGES_HURT = ImageHub.endboss.IMAGES_HURT;
     IMAGES_DEAD = ImageHub.endboss.IMAGES_DEAD;
+
+    AUDIO_ENDBOSS_DIE = AudioHub.endbossSounds.AUDIO_ENDBOSS_DIE;
+    AUDIO_ENDBOSS_SOUND = AudioHub.endbossSounds.AUDIO_ENDBOSS_SOUND;
     //#endregion
 
     //#region constructor
@@ -30,11 +34,9 @@ class Endboss extends MovableObject {
 
     //#region Methods
 
-    
-
-
-
     animate = () => {
+        this.AUDIO_ENDBOSS_SOUND;
+        this.moveLeft();
         this.playAnimation(this.IMAGES_WALKING);
     };
     //#endregion

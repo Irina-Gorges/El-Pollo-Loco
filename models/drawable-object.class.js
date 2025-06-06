@@ -27,17 +27,6 @@ class DrawableObject {
      * @param {CanvasRenderingContext2D} ctx - The context of the canvas where the image will be drawn.
      */
 
-    //* Rahmen drum herum malen für Collission
-    // drawFrame(ctx) {
-    //     if (this instanceof Character || this instanceof Chicken) {
-    //         ctx.beginPath();
-    //         ctx.lineWidth = '3';
-    //         ctx.strokeStyle = 'blue';
-    //         ctx.rect(this.x, this.y, this.width, this.height);
-    //         ctx.stroke();
-    //     }
-    // }
-
     /**
      * Zeichnet einen roten Rahmen um das MovableObject
      * @param {CanvasRenderingContext2D} ctx - der Context des Canvas-Elements

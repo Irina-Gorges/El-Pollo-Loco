@@ -1,23 +1,8 @@
 /**
  * @fileoverview Initializes the game canvas, handles keyboard input and audio playback.
  */
-
-/**
- * The canvas element for rendering the game.
- * @type {HTMLCanvasElement}
- */
 let canvas;
-
-/**
- * The game world instance.
- * @type {World}
- */
 let world;
-
-/**
- * Keyboard input state for controlling the character.
- * @type {Keyboard}
- */
 let keyboard = new Keyboard();
 
 /**

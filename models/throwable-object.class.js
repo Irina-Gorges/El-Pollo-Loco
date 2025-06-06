@@ -1,24 +1,8 @@
-/**
- * Class representing a throwable object that can move and break.
- * Inherits from MovableObject.
- */
 class ThrowableObject extends MovableObject {
     //#region Attributes
-    /**
-     * Width of the object in pixels.
-     * @type {number}
-     */
     width = 70;
-    /**
-     * Height of the object in pixels.
-     * @type {number}
-     */
     height = 70;
 
-    /**
-     * Offset values used for collision detection.
-     * @type {{top: number, right: number, bottom: number, left: number}}
-     */
     offset = {
         top: 0,
         right: 20,
@@ -26,20 +10,9 @@ class ThrowableObject extends MovableObject {
         left: 20,
     };
 
-    /**
-     * Reference to the bottle object (likely assigned later).
-     * @type {*}
-     */
     bottle;
-    /**
-     * Array of images used for the throwing animation.
-     * @type {string[]}
-     */
+
     IMAGES_THROW = ImageHub.bottles.IMAGES_THROW;
-    /**
-     * Array of images used for the splash/break animation.
-     * @type {string[]}
-     */
     IMAGES_SPLASH = ImageHub.bottles.IMAGES_SPLASH;
     //#endregion
 

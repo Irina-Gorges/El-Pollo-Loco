@@ -4,6 +4,7 @@ class Chicken extends MovableObject {
     y = 350;
     width = 70;
     height = 80;
+    energy = 2;
 
     rX;
     rY;
@@ -19,6 +20,9 @@ class Chicken extends MovableObject {
 
     IMAGES_WALKING = ImageHub.chicken.IMAGES_WALKING;
     IMAGES_DEAD = ImageHub.chicken.IMAGES_DEAD;
+
+    
+
     //#endregion
 
     //#region Constructor
@@ -46,8 +50,19 @@ class Chicken extends MovableObject {
      * Animates the enemy character by moving it left and playing the walking animation.
      * This method is called repeatedly at a fixed interval.
      */
+    // animate = () => {
+    //     this.moveLeft();
+    //     this.playAnimation(this.IMAGES_WALKING);
+    // };
+
     animate = () => {
-        this.moveLeft();
-        this.playAnimation(this.IMAGES_WALKING);
+        if (this.isDead()) {
+            // Prüfen, ob das Huhn tot ist
+            this.playAnimation(this.IMAGES_DEAD); // Todesanimation abspielen
+            this.speed = 0; // Bewegung stoppen
+        } else {
+            this.moveLeft(); // Normal weiterbewegen
+            this.playAnimation(this.IMAGES_WALKING); // Laufanimation abspielen
+        }
     };
 }

@@ -11,6 +11,7 @@ class SmallChicken extends MovableObject {
     y = 380;
     width = 50;
     height = 50;
+    energy = 2;
 
     rX;
     rY;
@@ -41,9 +42,6 @@ class SmallChicken extends MovableObject {
         this.speed = 0.25 + Math.random() * 0.5;
         IntervalHub.startInterval(this.animate, 1000 / 32, 100 / 5);
         this.getRealFrame();
-        this.hit();
-        this.isDead();
-        this.playAnimation();
     }
     //#endregion
 
@@ -52,9 +50,20 @@ class SmallChicken extends MovableObject {
     /**
      * Animation loop: moves the chicken left and plays walking animation.
      */
+    // animate = () => {
+    //     this.moveLeft();
+    //     this.playAnimation(this.IMAGES_WALKING);
+    // };
+
     animate = () => {
-        this.moveLeft();
-        this.playAnimation(this.IMAGES_WALKING);
+        if (this.isDead()) {
+            // Prüfen, ob das kleine Huhn tot ist
+            this.playAnimation(this.IMAGES_DEAD); // Todesanimation abspielen
+            this.speed = 0; // Bewegung stoppen
+        } else {
+            this.moveLeft(); // Normal weiterbewegen
+            this.playAnimation(this.IMAGES_WALKING); // Laufanimation abspielen
+        }
     };
     //#endregion
 }

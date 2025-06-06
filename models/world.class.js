@@ -16,6 +16,10 @@ class World {
     bottleBar = new BottleBar();
     endbossBar = new EndbossBar();
     throwableObjects = [];
+
+    AUDIO_COLLECTBOTTLE = AudioHub.bottleSounds.AUDIO_COLLECTBOTTLE;
+    AUDIO_BOTTLEBREAK = AudioHub.bottleSounds.AUDIO_BOTTLEBREAK;
+    AUDIO_BOTTLETHROW = AudioHub.bottleSounds.AUDIO_BOTTLETHROW;
     //#endregion
 
     //#region Constructor
@@ -26,6 +30,7 @@ class World {
         this.draw();
         this.setWorld();
         IntervalHub.startInterval(this.run, 1000 / 40);
+        this.throwKeyPressed = false;
     }
     //#endregion
 
@@ -53,6 +58,7 @@ class World {
     checkThrowObjects() {
         if (
             this.keyboard.THROW &&
+            !this.throwKeyPressed && // nur wenn Taste "neu" gedrückt wurde
             !this.character.isThrowing &&
             this.character.bottles > 0
         ) {
@@ -72,6 +78,12 @@ class World {
             this.character.isThrowing = true;
             this.character.throwStartTime = new Date().getTime();
             this.character.lastMoveTime = this.character.throwStartTime;
+
+            this.throwKeyPressed = true; // Taste wurde verarbeitet
+        }
+
+        if (!this.keyboard.THROW) {
+            this.throwKeyPressed = false;
         }
     }
 
@@ -82,7 +94,7 @@ class World {
         this.checkEnemyCollisions();
         this.checkCoinCollisions();
         this.checkBottlePickups();
-        this.checkThrowObjects();
+        // this.checkThrowObjects();
     }
 
     /**
@@ -112,6 +124,9 @@ class World {
         if (enemy.isDead()) {
             this.removeEnemy(enemy);
             console.log('Enemy defeated!');
+            setTimeout(() => {
+                this.removeEnemy(enemy);
+            }, 500);
         }
 
         this.character.jump();
