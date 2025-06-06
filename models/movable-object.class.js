@@ -68,7 +68,7 @@ class MovableObject extends DrawableObject {
      * The timestamp of the last hit is stored in lastHit.
      */
     hit() {
-        this.energy -= 5;
+        this.energy -= 2;
         if (this.energy < 0) {
             this.energy = 0;
         } else {

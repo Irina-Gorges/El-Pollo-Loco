@@ -144,6 +144,17 @@ class ImageHub {
         ],
     };
 
+    static endbossBar = {
+        IMAGES_BOSSBAR: [
+            'img/7_statusbars/2_statusbar_endboss/green/green0.png',
+            'img/7_statusbars/2_statusbar_endboss/green/green20.png',
+            'img/7_statusbars/2_statusbar_endboss/green/green40.png',
+            'img/7_statusbars/2_statusbar_endboss/green/green60.png',
+            'img/7_statusbars/2_statusbar_endboss/green/green80.png',
+            'img/7_statusbars/2_statusbar_endboss/green/green100.png',
+        ],
+    };
+
     static statusbar = {
         IMAGES_STATUS: [
             'img/7_statusbars/1_statusbar/2_statusbar_health/green/0.png',
@@ -282,7 +293,7 @@ class AudioHub {
 
     static defaultSettings = {
         volume: 0.1,
-        muted: false,
+        muted: true,
     };
 
     static getSettings() {

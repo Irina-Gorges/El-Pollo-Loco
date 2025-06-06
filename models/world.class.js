@@ -14,6 +14,7 @@ class World {
     statusBar = new StatusBar();
     coinsBar = new CoinsBar();
     bottleBar = new BottleBar();
+    endbossBar = new EndbossBar();
     throwableObjects = [];
     //#endregion
 
@@ -24,7 +25,7 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
-        IntervalHub.startInterval(this.run, 1000 / 5);
+        IntervalHub.startInterval(this.run, 1000 / 40);
     }
     //#endregion
 
@@ -198,6 +199,7 @@ class World {
         this.addToMap(this.statusBar);
         this.addToMap(this.coinsBar);
         this.addToMap(this.bottleBar);
+        this.addToMap(this.endbossBar);
         this.ctx.translate(this.camera_x, 0); // Forward
 
         this.addToMap(this.character);

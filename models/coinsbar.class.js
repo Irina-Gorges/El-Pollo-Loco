@@ -1,7 +1,10 @@
 class CoinsBar extends DrawableObject {
+     //#region Attributes
     IMAGES_COINSB = ImageHub.coinsbar.IMAGES_COINSB;
 
     coins = 0;
+    //#endregion
+
 
     //#region Constructor
     /**
