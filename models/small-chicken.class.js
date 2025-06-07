@@ -27,6 +27,9 @@ class SmallChicken extends MovableObject {
 
     IMAGES_WALKING = ImageHub.chicken_small.IMAGES_WALKING;
     IMAGES_DEAD = ImageHub.chicken_small.IMAGES_DEAD;
+
+    AUDIO_CHICKEN_SMALL_SOUND =
+        AudioHub.chickenSounds.AUDIO_CHICKEN_SMALL_SOUND;
     //#endregion
 
     //#region Constructor
@@ -50,10 +53,6 @@ class SmallChicken extends MovableObject {
     /**
      * Animation loop: moves the chicken left and plays walking animation.
      */
-    // animate = () => {
-    //     this.moveLeft();
-    //     this.playAnimation(this.IMAGES_WALKING);
-    // };
 
     animate = () => {
         if (this.isDead()) {
@@ -63,6 +62,7 @@ class SmallChicken extends MovableObject {
         } else {
             this.moveLeft(); // Normal weiterbewegen
             this.playAnimation(this.IMAGES_WALKING); // Laufanimation abspielen
+            this.AUDIO_CHICKEN_SMALL_SOUND.play();
         }
     };
     //#endregion

@@ -42,7 +42,7 @@ class Coin extends DrawableObject {
         this.coin = coin;
         let path = this.IMAGES_COIN[this.resolveImageIndex()];
         this.img = this.imageCache[path];
-        this.x = this.x + Math.random() * 2100;
+        this.x = this.x + Math.random() * 1900;
         this.y = this.y + Math.random() * 175;
     }
 

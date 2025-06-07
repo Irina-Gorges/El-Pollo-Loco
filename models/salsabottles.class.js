@@ -43,7 +43,7 @@ class SalsaBottles extends DrawableObject {
         this.bottlesOG = bottlesOG;
         let path = this.IMAGES_SALSABOTTLES[this.bottlesOG];
         this.img = this.imageCache[path];
-        this.x = this.x + Math.random() * 2000;
+        this.x = this.x + Math.random() * 1900;
         this.y = this.y + Math.random() * 5;
     }
 

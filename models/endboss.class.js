@@ -11,6 +11,7 @@ class Endboss extends MovableObject {
         bottom: 20,
         left: 5,
     };
+    lastHit = 0;
 
     IMAGES_WALKING = ImageHub.endboss.IMAGES_WALKING;
     IMAGES_ALERT = ImageHub.endboss.IMAGES_ALERT;
@@ -26,18 +27,42 @@ class Endboss extends MovableObject {
     constructor() {
         super().loadImage(this.IMAGES_WALKING[0]);
         this.loadImages(this.IMAGES_WALKING);
+        this.loadImages(this.IMAGES_ALERT);
+        this.loadImages(this.IMAGES_ATTACK);
+        this.loadImages(this.IMAGES_HURT);
+        this.loadImages(this.IMAGES_DEAD);
         this.x = 2500;
-        IntervalHub.startInterval(this.animate, 1000 / 5);
+        IntervalHub.startInterval(this.animate, 1000 / 25);
         this.getRealFrame();
     }
     //#endregion
 
     //#region Methods
 
-    animate = () => {
-        this.AUDIO_ENDBOSS_SOUND;
-        this.moveLeft();
-        this.playAnimation(this.IMAGES_WALKING);
+    animateMovement = () => {
+        if (this.triggered && !this.isDead()) {
+            this.moveLeft();
+        }
+
+        this.getRealFrame();
+    };
+
+    animateImages = () => {
+        if (this.isDead() && !gameover) {
+            this.playAnimation(this.IMAGES_DEAD);
+            this.AUDIO_ENDBOSS_DIE.play();
+            winOverlay();
+            gameover = true;
+        } else if (this.isHurt()) {
+            this.playAnimation(this.IMAGES_HURT);
+        } else if (this.isAttacking) {
+            this.playAnimation(this.IMAGES_ATTACK);
+        } else if (this.triggered) {
+            this.playAnimation(this.IMAGES_WALKING);
+            this.AUDIO_ENDBOSS_SOUND.play();
+        } else {
+            this.playAnimation(this.IMAGES_ALERT);
+        }
     };
     //#endregion
 }

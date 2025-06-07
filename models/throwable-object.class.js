@@ -14,6 +14,9 @@ class ThrowableObject extends MovableObject {
 
     IMAGES_THROW = ImageHub.bottles.IMAGES_THROW;
     IMAGES_SPLASH = ImageHub.bottles.IMAGES_SPLASH;
+
+    AUDIO_BOTTLEBREAK = AudioHub.bottleSounds.AUDIO_BOTTLEBREAK;
+    AUDIO_BOTTLETHROW = AudioHub.bottleSounds.AUDIO_BOTTLETHROW;
     //#endregion
 
     //#region Constructor
@@ -49,11 +52,13 @@ class ThrowableObject extends MovableObject {
         if (!this.hasBeenThrown) {
             this.speedY = 20;
             this.hasBeenThrown = true;
+            this.AUDIO_BOTTLETHROW.play();
         }
 
         if (!this.isBroken) {
             this.x += 15;
             this.playAnimation(this.IMAGES_THROW);
+            this.AUDIO_BOTTLEBREAK.play();
 
             // Prüfen, ob am Boden
             if (this.y >= 340) {

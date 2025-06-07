@@ -138,9 +138,9 @@ class ImageHub {
         ],
 
         IMAGES_DEAD: [
-            'img/4_enemie_boss_chicken/4_hurt/G24.png',
-            'img/4_enemie_boss_chicken/4_hurt/G25.png',
-            'img/4_enemie_boss_chicken/4_hurt/G26.png',
+            'img/4_enemie_boss_chicken/5_dead/G24.png',
+            'img/4_enemie_boss_chicken/5_dead/G25.png',
+            'img/4_enemie_boss_chicken/5_dead/G26.png',
         ],
     };
 
@@ -244,49 +244,49 @@ class IntervalHub {
  */
 class AudioHub {
     static backgroundMusic = {
-        AUDIO_BACKGROUND: ['audio/background-music.mp3'],
+        AUDIO_BACKGROUND: new Audio('audio/background-music.mp3'),
     };
 
     static bottleSounds = {
-        AUDIO_COLLECTBOTTLE: ['audio/bottle.mp3'],
+        AUDIO_COLLECTBOTTLE: new Audio('audio/bottle.mp3'),
 
-        AUDIO_BOTTLEBREAK: ['audio/bottle-break.mp3'],
+        AUDIO_BOTTLEBREAK: new Audio('audio/bottle-break.mp3'),
 
-        AUDIO_BOTTLETHROW: ['audio/throw.mp3'],
+        AUDIO_BOTTLETHROW: new Audio('audio/throw.mp3'),
     };
 
     static coinSounds = {
-        AUDIO_COLLECTCOINS: ['audio/collect-coin-2.mp3'],
+        AUDIO_COLLECTCOINS: new Audio('audio/collect-coin-2.mp3'),
     };
 
     static characterSounds = {
-        AUDIO_CHARACTER_DIE: ['audio/character-die.mp3'],
+        AUDIO_CHARACTER_DIE: new Audio('audio/character-die.mp3'),
 
-        AUDIO_CHARACTER_HURT: ['audio/hurt.mp3'],
+        AUDIO_CHARACTER_HURT: new Audio('audio/hurt.mp3'),
 
-        AUDIO_CHARACTER_JUMP: ['audio/jumping.mp3'],
+        AUDIO_CHARACTER_JUMP: new Audio('audio/jumping.mp3'),
 
-        AUDIO_CHARACTER_RUN: ['audio/running.mp3'],
+        AUDIO_CHARACTER_RUN: new Audio('audio/running.mp3'),
 
-        AUDIO_CHARACTER_SNORING: ['audio/snoring.mp3'],
+        AUDIO_CHARACTER_SNORING: new Audio('audio/snoring.mp3'),
     };
 
     static chickenSounds = {
-        AUDIO_CHICKENSOUND: ['audio/chicken.mp3'],
+        AUDIO_CHICKENSOUND: new Audio('audio/chicken.mp3'),
 
-        AUDIO_CHICKEN_SMALL_SOUND: ['audio/chickenSmall.mp3'],
+        AUDIO_CHICKEN_SMALL_SOUND: new Audio('audio/chickenSmall.mp3'),
     };
 
     static endbossSounds = {
-        AUDIO_ENDBOSS_DIE: ['audio/endboss-die.mp3'],
+        AUDIO_ENDBOSS_DIE: new Audio('audio/endboss-die.mp3'),
 
-        AUDIO_ENDBOSS_SOUND: ['audio/endboss-sound.mp3'],
+        AUDIO_ENDBOSS_SOUND: new Audio('audio/endboss-sound.mp3'),
     };
 
     static gameSounds = {
-        AUDIO_GAMEWIN: ['audio/win.mp3'],
+        AUDIO_GAMEWIN: new Audio('audio/win.mp3'),
 
-        AUDIO_GAMELOST: ['audio/lose.mp3'],
+        AUDIO_GAMELOST: new Audio('audio/lose.mp3'),
     };
 
     static settingsKey = 'audio_settings';

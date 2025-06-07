@@ -17,9 +17,6 @@ class World {
     endbossBar = new EndbossBar();
     throwableObjects = [];
 
-    AUDIO_COLLECTBOTTLE = AudioHub.bottleSounds.AUDIO_COLLECTBOTTLE;
-    AUDIO_BOTTLEBREAK = AudioHub.bottleSounds.AUDIO_BOTTLEBREAK;
-    AUDIO_BOTTLETHROW = AudioHub.bottleSounds.AUDIO_BOTTLETHROW;
     //#endregion
 
     //#region Constructor
@@ -119,8 +116,7 @@ class World {
      */
     handleEnemyJumpCollision(enemy) {
         enemy.hit();
-        console.log('boing');
-
+        enemy.playAnimation(this.IMAGES_DEAD); // Todesanimation abspielen
         if (enemy.isDead()) {
             this.removeEnemy(enemy);
             console.log('Enemy defeated!');
