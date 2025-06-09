@@ -15,7 +15,21 @@
         <main>
             <div id="main_Content">
                 <h1>El Pollo Loco</h1>
+                <div id="rotateScreen">
+                    <img src="./img/rotate_phone (1).gif" alt="">
+                </div>
+
+                <div class="start-Screen screens d_none" id="startScreen">
+                    <button
+                        class="StartBtn"
+                        id="startButton"
+                        onclick="startGame"
+                    >
+                        START
+                    </button>
+                </div>
                 <canvas id="canvas" width="720" height="480"></canvas>
+
                 <div id="audio-controls">
                     <label for="volumeSlider">🎵</label>
                     <input
@@ -39,15 +53,15 @@
                         </span>
                     </div>
                 </div>
-                <div class="start-Screen screens d_none" id="startScreen">
-                    <button
-                        class="StartBtn"
-                        id="startButton"
-                        onclick="startGame"
-                    >
-                        START
-                    </button>
+
+                <div id="winScreen">
+                    <img src="img/You won, you lost/You Win A.png" alt="win screen">
+                    <div class="flex">
+                        <button class="btn-style" onclick="showStartFromWin()">HOME</button>
+                <button class="btn-style" onclick="restartGame()">RESTART</button>
+                    </div>
                 </div>
+                
                 <div id="mobileUI">
                     <div id="mobile-movement" class="img-position">
                 <button id="mo-ui-left" class="btn-style img-position">

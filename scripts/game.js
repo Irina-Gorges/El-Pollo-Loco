@@ -4,6 +4,11 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let isShowing = false;
+
+const startScreen = document.getElementById('startScreen');
+const winScreen = document.getElementById('winScreen');
+const lostScreen = document.getElementById('lostScreen');
 
 /**
  * Initializes the canvas and game world, and gets the drawing context.
@@ -16,6 +21,12 @@ function init() {
 
     console.log('My Character is', world.character);
 }
+
+
+
+
+
+
 
 /**
  * Background music audio element.
