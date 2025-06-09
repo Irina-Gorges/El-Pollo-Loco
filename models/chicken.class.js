@@ -59,7 +59,6 @@ class Chicken extends MovableObject {
         } else {
             this.moveLeft(); // Normal weiterbewegen
             this.playAnimation(this.IMAGES_WALKING); // Laufanimation abspielen
-            this.AUDIO_CHICKENSOUND.play();
         }
     };
 }

@@ -45,7 +45,7 @@ body {
     padding-right: 30px;
 
     h1 {
-        font-size: 68px;
+        font-size: 60px;
         text-shadow: 3px 2px 7px rgba(39, 39, 39, 0.829);
     }
 
@@ -67,7 +67,6 @@ body {
 }
 
 #audio-controls {
-    _position: fixed;
     bottom: 20px;
     left: 20px;
     background: rgba(30, 30, 30, 0.8);

@@ -76,6 +76,31 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    hitOnChicken() {
+        if (this instanceof Chicken) {
+            this.loadImage(this.IMAGES_DEAD);
+            this.AUDIO_CHICKENSOUND.play();
+        } else if (this instanceof SmallChicken) {
+            this.loadImage(this.IMAGES_DEAD);
+            this.AUDIO_CHICKEN_SMALL_SOUND.play();
+        } else {
+            return; //prevents error messages jumping on th endboss
+        }
+        this.stopChicken();
+    }
+
+    stopChicken() {
+        this.speed = 0;
+    }
+
+    hitEndboss() {
+        this.energy -= 4;
+        if (this.energy < 0) {
+            this.energy = 0;
+        } else {
+            this.lastHit = new Date().getTime();
+        }
+    }
     /**
      * Returns true if the movable object has been hit in the last second.
      * @returns {boolean} True if the movable object has been hit in the last second.

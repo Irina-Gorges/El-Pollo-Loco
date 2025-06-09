@@ -4,6 +4,16 @@ class SalsaBottles extends DrawableObject {
 
     bottlesOG = 0;
 
+    x = 340;
+    y = 340;
+    width = 90;
+    height = 90;
+
+    rX;
+    rY;
+    rW;
+    rH;
+
     offset = {
         top: 10,
         right: 25,
@@ -22,10 +32,6 @@ class SalsaBottles extends DrawableObject {
     constructor() {
         super();
         this.loadImages(this.IMAGES_SALSABOTTLES);
-        this.x = 340;
-        this.y = 340;
-        this.width = 90;
-        this.height = 90;
         this.setBottlesOG(this.getRandom1Or2()); // Setzt das Anfangsbild der Bottle ein
         this.getRealFrame();
     }

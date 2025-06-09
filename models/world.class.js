@@ -91,7 +91,6 @@ class World {
         this.checkEnemyCollisions();
         this.checkCoinCollisions();
         this.checkBottlePickups();
-        // this.checkThrowObjects();
     }
 
     /**
@@ -99,6 +98,7 @@ class World {
      */
     checkEnemyCollisions() {
         this.level.enemies.forEach((enemy) => {
+            if (enemy.isDead()) return;
             if (
                 this.character.isColliding(enemy) &&
                 this.character.speedY != 0
@@ -108,6 +108,13 @@ class World {
                 this.handleEnemySideCollision();
             }
         });
+
+        if (this.throwableObjects.length > 0) {
+            console.log('kollision');
+            this.throwableObjects.forEach((bottle) => {
+                this.handleBottleHitEnemy(bottle);
+            });
+        }
     }
 
     /**
@@ -116,15 +123,13 @@ class World {
      */
     handleEnemyJumpCollision(enemy) {
         enemy.hit();
-        enemy.playAnimation(this.IMAGES_DEAD); // Todesanimation abspielen
+        enemy.hitOnChicken();
         if (enemy.isDead()) {
-            this.removeEnemy(enemy);
             console.log('Enemy defeated!');
             setTimeout(() => {
                 this.removeEnemy(enemy);
             }, 500);
         }
-
         this.character.jump();
     }
 
@@ -177,12 +182,43 @@ class World {
      * @param {Enemy} enemy - The enemy being hit.
      * @param {number} enemyIndex - The index of the enemy in the enemies array.
      */
-    handleBottleHitEnemy(bottle, enemy, enemyIndex) {
-        enemy.hit();
-        bottle.break();
-        if (enemy.isDead()) {
-            this.level.enemies.splice(enemyIndex, 1);
-        }
+    // handleBottleHitEnemy(bottle, enemy, enemyIndex) {
+    //     enemy.hit();
+    //     bottle.break();
+    //     if (enemy.isDead()) {
+    //         this.level.enemies.splice(enemyIndex, 1);
+    //     }
+    // }
+
+    handleBottleHitEnemy(bottle) {
+        this.level.enemies.forEach((enemy) => {
+            if (enemy instanceof Endboss) {
+                console.log('enemy ist: ' + enemy);
+                if (bottle.isColliding(enemy)) {
+                    enemy.hit();
+                    this.endbossBar.setHealth(enemy.energy);
+                }
+                if (enemy.energy == 0) {
+                    enemy.isDead();
+                    //this.level.enemies.remove(enemyIndex, 6);
+                }
+            }
+        });
+        let test = this.throwableObjects.length;
+        // if (bottle.hit()) {
+        //     if (endboss.isDead()) {
+        //         bottle.break();
+        //     } else {
+        //         endboss.hit(); // Schaden hinzufügen
+        //         bottle.break();
+        //         console.log('Boss sagt autsch');
+
+        //     }
+        //     this.endbossBar.setHealth(endboss.energy);
+        //     if (endboss.isDead()) {
+        //         this.level.enemies.remove(enemyIndex, 6);
+        //     }
+        // }
     }
 
     //#endregion

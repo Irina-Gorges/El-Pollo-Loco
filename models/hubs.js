@@ -242,6 +242,7 @@ class IntervalHub {
  * It organizes sounds by category and provides methods to get, save,
  * and apply audio settings like volume and mute status.
  */
+
 class AudioHub {
     static backgroundMusic = {
         AUDIO_BACKGROUND: new Audio('audio/background-music.mp3'),
@@ -280,7 +281,11 @@ class AudioHub {
     static endbossSounds = {
         AUDIO_ENDBOSS_DIE: new Audio('audio/endboss-die.mp3'),
 
-        AUDIO_ENDBOSS_SOUND: new Audio('audio/endboss-sound.mp3'),
+        AUDIO_ENDBOSS_AGGRO: new Audio('audio/endboss-aggro.mp3'),
+
+        AUDIO_ENDBOSS_WALK: new Audio('audio/walking.mp3'),
+
+        AUDIO_ENDBOSS: new Audio('audio/boss.mp3'),
     };
 
     static gameSounds = {

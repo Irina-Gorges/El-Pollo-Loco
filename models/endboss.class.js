@@ -12,6 +12,8 @@ class Endboss extends MovableObject {
         left: 5,
     };
     lastHit = 0;
+    triggered = false;
+    isAttacking = false;
 
     IMAGES_WALKING = ImageHub.endboss.IMAGES_WALKING;
     IMAGES_ALERT = ImageHub.endboss.IMAGES_ALERT;
@@ -20,7 +22,9 @@ class Endboss extends MovableObject {
     IMAGES_DEAD = ImageHub.endboss.IMAGES_DEAD;
 
     AUDIO_ENDBOSS_DIE = AudioHub.endbossSounds.AUDIO_ENDBOSS_DIE;
-    AUDIO_ENDBOSS_SOUND = AudioHub.endbossSounds.AUDIO_ENDBOSS_SOUND;
+    AUDIO_ENDBOSS_ = AudioHub.endbossSounds.AUDIO_ENDBOSS;
+    AUDIO_ENDBOSS_AGGRO = AudioHub.endbossSounds.AUDIO_ENDBOSS_AGGRO;
+    AUDIO_ENDBOSS_WALK = AudioHub.endbossSounds.AUDIO_ENDBOSS_WALK;
     //#endregion
 
     //#region constructor
@@ -39,15 +43,10 @@ class Endboss extends MovableObject {
 
     //#region Methods
 
-    animateMovement = () => {
+    animate = () => {
         if (this.triggered && !this.isDead()) {
             this.moveLeft();
         }
-
-        this.getRealFrame();
-    };
-
-    animateImages = () => {
         if (this.isDead() && !gameover) {
             this.playAnimation(this.IMAGES_DEAD);
             this.AUDIO_ENDBOSS_DIE.play();
@@ -55,14 +54,17 @@ class Endboss extends MovableObject {
             gameover = true;
         } else if (this.isHurt()) {
             this.playAnimation(this.IMAGES_HURT);
+            this.AUDIO_ENDBOSS_AGGRO.play();
         } else if (this.isAttacking) {
             this.playAnimation(this.IMAGES_ATTACK);
+            this.AUDIO_ENDBOSS_AGGRO.play();
         } else if (this.triggered) {
             this.playAnimation(this.IMAGES_WALKING);
-            this.AUDIO_ENDBOSS_SOUND.play();
+            this.AUDIO_ENDBOSS_WALK.play();
         } else {
             this.playAnimation(this.IMAGES_ALERT);
         }
     };
+
     //#endregion
 }

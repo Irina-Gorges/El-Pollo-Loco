@@ -2,6 +2,12 @@ class ThrowableObject extends MovableObject {
     //#region Attributes
     width = 70;
     height = 70;
+    isBroken = false;
+
+    rX;
+    rY;
+    rW;
+    rH;
 
     offset = {
         top: 0,
@@ -33,8 +39,6 @@ class ThrowableObject extends MovableObject {
         this.loadImages(this.IMAGES_SPLASH);
         this.x = x;
         this.y = y;
-        this.isBroken = false;
-
         // this.applyGravity(); // nur 1x aktivieren
         IntervalHub.startInterval(this.applyGravity, 1000 / 40);
         IntervalHub.startInterval(this.throw, 1000 / 40); // regelmäßiger Aufruf

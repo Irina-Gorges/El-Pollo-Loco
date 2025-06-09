@@ -62,7 +62,6 @@ class SmallChicken extends MovableObject {
         } else {
             this.moveLeft(); // Normal weiterbewegen
             this.playAnimation(this.IMAGES_WALKING); // Laufanimation abspielen
-            this.AUDIO_CHICKEN_SMALL_SOUND.play();
         }
     };
     //#endregion
