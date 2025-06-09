@@ -16,8 +16,8 @@ class StatusBar extends DrawableObject {
         this.loadImages(this.IMAGES_STATUS);
         this.x = 20;
         this.y = 0;
-        this.width = 150;
-        this.height = 45;
+        this.width = 130;
+        this.height = 40;
         this.setHealth(100); // setzt das Anfangsbild der Statusbar ein
     }
     //#endregion

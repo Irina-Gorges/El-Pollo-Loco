@@ -14,10 +14,10 @@ class BottleBar extends DrawableObject {
     constructor() {
         super();
         this.loadImages(this.IMAGES_BOTTLESB);
-        this.x = 340;
-        this.y = 0;
-        this.width = 160;
-        this.height = 45;
+        this.x = 20;
+        this.y = 60;
+        this.width = 130;
+        this.height = 40;
         this.setBottles(0); // Setzt das Anfangsbild der Bottlesbar ein
     }
     //#endregion

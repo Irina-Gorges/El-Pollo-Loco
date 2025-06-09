@@ -1,10 +1,9 @@
 class CoinsBar extends DrawableObject {
-     //#region Attributes
+    //#region Attributes
     IMAGES_COINSB = ImageHub.coinsbar.IMAGES_COINSB;
 
     coins = 0;
     //#endregion
-
 
     //#region Constructor
     /**
@@ -15,10 +14,10 @@ class CoinsBar extends DrawableObject {
     constructor() {
         super();
         this.loadImages(this.IMAGES_COINSB);
-        this.x = 180;
-        this.y = 0;
-        this.width = 150;
-        this.height = 45;
+        this.x = 20;
+        this.y = 30;
+        this.width = 130;
+        this.height = 40;
         this.setCoins(0); // Setzt das Anfangsbild der Coinsbar ein
     }
     //#endregion
