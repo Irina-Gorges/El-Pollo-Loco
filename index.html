@@ -14,7 +14,9 @@
     <body onload="init()">
         <main>
             <div id="main_Content">
+
                 <h1>El Pollo Loco</h1>
+
                 <div id="rotateScreen">
                     <img src="./img/rotate_phone (1).gif" alt="">
                 </div>
@@ -28,6 +30,7 @@
                         START
                     </button>
                 </div>
+
                 <canvas id="canvas" width="720" height="480"></canvas>
 
                 <div id="audio-controls">
@@ -61,6 +64,14 @@
                 <button class="btn-style" onclick="restartGame()">RESTART</button>
                     </div>
                 </div>
+
+                <div id="lostScreen">
+                    <img src="img/You won, you lost/You lost.png" alt="lost screen">
+                    <div class="flex">
+                        <button class="btn-style" onclick="showStartFromLoose()">HOME</button>
+                <button class="btn-style" onclick="restartGame()">RESTART</button>
+                    </div>
+                </div>
                 
                 <div id="mobileUI">
                     <div id="mobile-movement" class="img-position">
@@ -81,6 +92,7 @@
                 </div>
             </div>
         </main>
+        
         <script src="models/drawable-object.class.js"></script>
         <script src="models/movable-object.class.js"></script>
         <script src="models/character.class.js"></script>

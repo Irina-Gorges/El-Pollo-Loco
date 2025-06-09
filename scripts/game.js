@@ -18,15 +18,58 @@ function init() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
     ctx = canvas.getContext('2d');
-
-    console.log('My Character is', world.character);
+    showStartScreen();
+    hideWinScreen();
+    hideLostScreen();
 }
 
+function startGame() {
+    hideStartScreen();
+    world = new World(canvas, keyboard);
+    AudioHub.playSound(AudioHub.backgroundMusic);
+}
 
+function restartGame() {
+    initLevel();
+    world = new World(canvas, keyboard);
+    hideWinScreen();
+    hideLostScreen();
+}
 
+function hideStartScreen() {
+    startScreen.classList.add('hide');
+    startScreen.classList.remove('show');
+    startScreen.style.zIndex = -10;
+}
 
+function hideWinScreen() {
+    winScreen.classList.add('hide');
+    winScreen.classList.remove('show');
+    winScreen.style.zIndex = -15;
+}
 
+function showStartScreen() {
+    startScreen.classList.remove('hide');
+    startScreen.classList.add('show');
+    startScreen.style.zIndex = 10;
+}
 
+function showLostScreen() {
+    lostScreen.classList.add('show');
+    lostScreen.classList.remove('hide');
+    lostScreen.style.zIndex = 15;
+    IntervalHub.stopEveryInterval();
+    AudioHub.playSound(AudioHub.loose);
+}
+
+/**
+ * Hides the lose screen.
+ */
+function hideLostScreen() {
+    lostScreen.classList.add('hide');
+    lostScreen.classList.remove('show');
+    lostScreen.style.zIndex = -15;
+}
 
 /**
  * Background music audio element.
