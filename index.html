@@ -25,7 +25,7 @@
                     <button
                         class="StartBtn"
                         id="startButton"
-                        onclick="startGame"
+                        onclick="startGame(), initLevel()"
                     >
                         START
                     </button>
@@ -65,8 +65,8 @@
                     </div>
                 </div>
 
-                <div id="lostScreen">
-                    <img src="img/You won, you lost/You lost.png" alt="lost screen">
+                <div id="gameOverScreen">
+                    <img src="img/You won, you lost/Game Over.png" alt="gameOver screen">
                     <div class="flex">
                         <button class="btn-style" onclick="showStartFromLoose()">HOME</button>
                 <button class="btn-style" onclick="restartGame()">RESTART</button>
@@ -92,7 +92,7 @@
                 </div>
             </div>
         </main>
-        
+
         <script src="models/drawable-object.class.js"></script>
         <script src="models/movable-object.class.js"></script>
         <script src="models/character.class.js"></script>

@@ -8,7 +8,7 @@ let isShowing = false;
 
 const startScreen = document.getElementById('startScreen');
 const winScreen = document.getElementById('winScreen');
-const lostScreen = document.getElementById('lostScreen');
+const gameOverScreen = document.getElementById('gameOverScreen');
 
 /**
  * Initializes the canvas and game world, and gets the drawing context.
@@ -20,20 +20,20 @@ function init() {
     ctx = canvas.getContext('2d');
     showStartScreen();
     hideWinScreen();
-    hideLostScreen();
+    hideGameOverScreen();
 }
 
 function startGame() {
     hideStartScreen();
     world = new World(canvas, keyboard);
-    AudioHub.playSound(AudioHub.backgroundMusic);
+    AudioHub.playSound(AudioHub.backgroundMusic.AUDIO_BACKGROUND);
 }
 
 function restartGame() {
     initLevel();
     world = new World(canvas, keyboard);
     hideWinScreen();
-    hideLostScreen();
+    hideGameOverScreen();
 }
 
 function hideStartScreen() {
@@ -54,21 +54,21 @@ function showStartScreen() {
     startScreen.style.zIndex = 10;
 }
 
-function showLostScreen() {
-    lostScreen.classList.add('show');
-    lostScreen.classList.remove('hide');
-    lostScreen.style.zIndex = 15;
-    IntervalHub.stopEveryInterval();
-    AudioHub.playSound(AudioHub.loose);
+function showGameOverScreen() {
+    gameOverScreen.classList.add('show');
+    gameOverScreen.classList.remove('hide');
+    gameOverScreen.style.zIndex = 15;
+    IntervalHub.stopAllIntervals();
+    AudioHub.playSound(AudioHub.gameSounds.AUDIO_GAMELOST);
 }
 
 /**
  * Hides the lose screen.
  */
-function hideLostScreen() {
-    lostScreen.classList.add('hide');
-    lostScreen.classList.remove('show');
-    lostScreen.style.zIndex = -15;
+function hideGameOverScreen() {
+    gameOverScreen.classList.add('hide');
+    gameOverScreen.classList.remove('show');
+    gameOverScreen.style.zIndex = -15;
 }
 
 /**
