@@ -77,6 +77,7 @@ function hideGameOverScreen() {
  */
 const bgMusic = new Audio(AudioHub.backgroundMusic.AUDIO_BACKGROUND[0]);
 bgMusic.loop = true;
+bgMusic.volume = 0.15; // Standardlautstärke auf 15%
 
 AudioHub.applySettingsTo(bgMusic); // Lautstärke & Mute anwenden
 bgMusic.play();
@@ -89,13 +90,17 @@ window.addEventListener('DOMContentLoaded', () => {
     const muteBtn = document.getElementById('muteBtn');
 
     const audioSettings = AudioHub.getSettings();
-    slider.value = audioSettings.volume;
+    slider.value = audioSettings.volume ?? 0.15; // Fallback auf 0.15 falls nicht gesetzt
     updateMuteButton(audioSettings.muted);
 
     // Volume ändern
     slider.addEventListener('input', (e) => {
         const newVolume = parseFloat(e.target.value);
         AudioHub.setVolume(newVolume);
+        // Alle Sounds auf neue Lautstärke setzen
+        if (AudioHub.setVolumeForAll) {
+            AudioHub.setVolumeForAll(newVolume);
+        }
         if (window.bgMusic) {
             window.bgMusic.volume = newVolume;
         }
@@ -111,6 +116,12 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+
+    AudioHub.playSound = function(src) {
+    const audio = new Audio(src);
+    audio.volume = 0.15; // Standardlautstärke
+    audio.play();
+};
     /**
      * Updates the mute button icon based on mute state.
      * @param {boolean} muted - Whether audio is muted.
@@ -186,3 +197,15 @@ window.addEventListener('keyup', (event) => {
     }
     console.log(event);
 });
+
+// Beispiel für audioHub.js
+AudioHub.setVolumeForAll = function(volume) {
+    // Alle Audio-Objekte durchgehen und Lautstärke setzen
+    const allAudios = [
+        window.bgMusic,
+        // weitere Audio-Objekte hier ergänzen, z.B. window.gameLostSound, etc.
+    ];
+    allAudios.forEach(audio => {
+        if (audio) audio.volume = volume;
+    });
+};

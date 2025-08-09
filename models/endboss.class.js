@@ -2,6 +2,7 @@ class Endboss extends MovableObject {
     //#region Attributes
     height = 400;
     width = 320;
+    x = 2500;
     y = 60;
     energy = 10;
 
@@ -35,9 +36,9 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_ATTACK);
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
-        this.x = 2500;
         IntervalHub.startInterval(this.animate, 1000 / 25);
         this.getRealFrame();
+        this.animate();
     }
     //#endregion
 

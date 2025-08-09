@@ -1,9 +1,10 @@
 class Character extends MovableObject {
     //#region Attributes
     speed = 5;
+    height = 260;
     width = 130;
     y = 175;
-    height = 260;
+    
 
     rX;
     rY;

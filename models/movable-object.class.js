@@ -8,6 +8,7 @@ class MovableObject extends DrawableObject {
     energy = 100; //* die Lebensanzeige des Charakters
     lastHit = 0;
     damage = 0;
+    y = 175; //* die Y-Position des Charakters
 
     //#endregion
 
@@ -135,6 +136,7 @@ class MovableObject extends DrawableObject {
     moveRight() {
         this.x += this.speed;
         this.rX += this.speed;
+        this.bossColliding();
     }
 
     moveLeft() {
@@ -146,5 +148,12 @@ class MovableObject extends DrawableObject {
         this.speedY = 27;
     }
 
+    bossColliding() {
+        console.log("rX" + this.rX);
+        
+        if (this.rX >= this.world.level.level_end_x) {
+            this.triggered = true;
+        }
+    }
     //#endregion
 }
