@@ -1,16 +1,14 @@
-class Chicken extends MovableObject {
-    //#region Attributes
-    x = 260;
-    y = 350;
-    width = 70;
-    height = 80;
-    energy = 2;
+// #region class Chicken
 
-    rX;
-    rY;
-    rW;
-    rH;
+/**
+ * Enemy chicken character that moves randomly to the left.
+ * Reacts to collisions and can die.
+ */
+class Chicken extends MoveableObject {
+    // #region Properties
 
+    hp = 10;
+    isHit = false;
     offset = {
         top: 5,
         right: 5,
@@ -18,47 +16,113 @@ class Chicken extends MovableObject {
         left: 5,
     };
 
-    IMAGES_WALKING = ImageHub.chicken.IMAGES_WALKING;
-    IMAGES_DEAD = ImageHub.chicken.IMAGES_DEAD;
+    // #endregion
 
-    AUDIO_CHICKENSOUND = AudioHub.chickenSounds.AUDIO_CHICKENSOUND;
+    // #region Constructor
 
-    //#endregion
-
-    //#region Constructor
     /**
-     * Creates a new instance of the enemy character.
-     * Loads the initial walk image and animation image sets (walking and dead).
-     * Sets a random horizontal starting position and speed.
-     * Starts the animation interval for this character.
-     * Initializes the current animation frame.
+     * Creates a new normal chicken with random position and movement.
      */
     constructor() {
-        super().loadImage(
-            'img/3_enemies_chicken/chicken_normal/1_walk/1_w.png'
-        );
-        this.loadImages(this.IMAGES_WALKING);
-        this.loadImages(this.IMAGES_DEAD);
-        this.x = this.x + Math.random() * 2200;
-        this.speed = 0.5 + Math.random() * 0.5;
-        IntervalHub.startInterval(this.animate, 1000 / 20, 100 / 5);
-        this.getRealFrame();
+        super();
+        Intervalhub.startInterval(this.getRealFrame, 1000 / 60);
+        this.loadImages(ImageHub.chicken_normal.walk);
+        this.loadImage(ImageHub.chicken_normal.walk[0]);
+        this.x = 300 + Math.random() * 1000;
+        this.speed = 0.3 + Math.random() * 1;
+        Intervalhub.startInterval(this.animate, 1000 / 5);
+        if (this.hp > 0) {
+            Intervalhub.startInterval(this.moveLeft, 1000 / 60);
+        }
     }
-    //#endregion
+
+    // #endregion
+
+    // #region Methods
 
     /**
-     * Animates the enemy character by moving it left and playing the walking animation.
-     * This method is called repeatedly at a fixed interval.
+     * Executes the walking animation or displays the death image.
      */
-
     animate = () => {
-        if (this.isDead()) {
-            // Prüfen, ob das Huhn tot ist
-            this.speed = 0; // Bewegung stoppen
-            this.playAnimation(this.IMAGES_DEAD); // Todesanimation abspielen
+        if (!this.chickenIsDead) {
+            this.playAnimation(ImageHub.chicken_normal.walk);
         } else {
-            this.moveLeft(); // Normal weiterbewegen
-            this.playAnimation(this.IMAGES_WALKING); // Laufanimation abspielen
+            this.loadImage(ImageHub.chicken_normal.dead[0]);
         }
     };
+
+    /**
+     * Loads the first image of the normal chicken.
+     */
+    loadImageChicken() {
+        this.loadImage(ImageHub.chicken_normal.walk[0]);
+    }
+
+    // #endregion
 }
+
+// #endregion
+
+// #region class SmallChicken
+
+/**
+ * Enemy mini-chicken character, a smaller variant of the normal chicken.
+ */
+class SmallChicken extends MoveableObject {
+    // #region Properties
+
+    hp = 10;
+    isHit = false;
+    offset = {
+        top: 5,
+        right: 5,
+        bottom: 5,
+        left: 5,
+    };
+
+    // #endregion
+
+    // #region Constructor
+
+    /**
+     * Creates a new small chicken with random position and movement.
+     */
+    constructor() {
+        super();
+        Intervalhub.startInterval(this.getRealFrame, 1000 / 60);
+        this.loadImages(ImageHub.chicken_small.walk);
+        this.loadImage(ImageHub.chicken_small.walk[0]);
+        this.x = 300 + Math.random() * 1000;
+        this.speed = 0.3 + Math.random() * 1;
+        Intervalhub.startInterval(this.animate, 1000 / 5);
+        if (this.hp > 0) {
+            Intervalhub.startInterval(this.moveLeft, 1000 / 60);
+        }
+    }
+
+    // #endregion
+
+    // #region Methods
+
+    /**
+     * Executes the walking animation or displays the death image.
+     */
+    animate = () => {
+        if (!this.chickenIsDead) {
+            this.playAnimation(ImageHub.chicken_small.walk);
+        } else {
+            this.loadImage(ImageHub.chicken_small.dead[0]);
+        }
+    };
+
+    /**
+     * Loads the first image of the small chicken.
+     */
+    loadImageChicken() {
+        this.loadImage(ImageHub.chicken_small.walk[0]);
+    }
+
+    // #endregion
+}
+
+// #endregion

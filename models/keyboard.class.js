@@ -1,8 +1,21 @@
+// #region class Keyboard
+
+/**
+ * Represents the current state of keyboard inputs.
+ * The flags are set and reset by event listeners.
+ */
+
 class Keyboard {
+    // #region Properties
+
     LEFT = false;
     RIGHT = false;
     UP = false;
     DOWN = false;
-    SPACE = false;
-    THROW = false;
+    SPACEBAR = false;
+    C = false;
+
+    // #endregion
 }
+
+// #endregion

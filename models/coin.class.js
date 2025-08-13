@@ -1,70 +1,56 @@
-class Coin extends DrawableObject {
-    //#region Attributes
-    IMAGES_COIN = ImageHub.coin.IMAGES_COIN;
+// #region class Coin
 
-    coins = 0;
+/**
+ * Represents a collectible coin object in the game.
+ * Inherits animation and collision logic from ConsumeableObject.
+ */
+class Coin extends ConsumeableObject {
+    // #region Properties
 
+    height = 100;
+    width = 100;
+    x = 200;
+    offsetx = 0;
     offset = {
-        top: 40,
-        right: 40,
-        bottom: 40,
-        left: 40,
+        top: 30,
+        right: 30,
+        bottom: 30,
+        left: 30,
     };
-    //#endregion
 
-    //#region Constructor
+    // #endregion
+
     /**
-     * Class constructor.
-     * Loads the coin images, sets the initial position and size of the object,
-     * initializes the coin display to 0, and determines the current frame.
+     * Creates a new coin at the specified position.
+     * @param {number} x - Base X position
+     * @param {number} y - Y position
+     * @param {number} offsetx - Horizontal offset (e.g. for level distribution)
      */
-    constructor() {
+    constructor(x, y, offsetx) {
         super();
-        this.loadImages(this.IMAGES_COIN);
-        this.x = 340;
-        this.y = 180;
-        this.width = 120;
-        this.height = 120;
-        this.setCoin(0); // Setzt das Anfangsbild der Coins ein
-        this.getRealFrame();
-    }
-    //#endregion
-
-    //#region Methods
-    /**
-     * Sets the current coin amount and updates the displayed image.
-     * The coin's position is randomly shifted within specified ranges.
-     *
-     * @param {number} coin - The amount of coins to set.
-     */
-    //* Coinanzeige
-    setCoin(coin) {
-        this.coin = coin;
-        let path = this.IMAGES_COIN[this.resolveImageIndex()];
-        this.img = this.imageCache[path];
-        this.x = this.x + Math.random() * 1900;
-        this.y = this.y + Math.random() * 175;
+        Intervalhub.startInterval(this.getRealFrame, 1000 / 60);
+        this.loadImage("img/8_coin/coin_1.png");
+        this.loadImages(ImageHub.images_of_coins);
+        this.animate();
+        this.x = x + offsetx;
+        this.y = y;
     }
 
     /**
-     * Determines the index of the image to display based on the current coin amount.
-     *
-     * @returns {number} The index of the image in IMAGES_COIN corresponding to the coin amount.
+     * Creates a full coin pattern (e.g. arches or towers) with offset.
+     * @param {number} offsetx - Horizontal starting offset
+     * @param {number} count - Number of coins to generate
+     * @returns {Coin[]} Array of Coin instances
      */
-    resolveImageIndex() {
-        if (this.coins == 0) {
-            return 0;
-        } else if (this.coins > 20) {
-            return 1;
-        } else if (this.coins > 40) {
-            return 2;
-        } else if (this.coins > 60) {
-            return 3;
-        } else if (this.coins > 80) {
-            return 4;
-        } else {
-            return 5;
+    static multipleCoins(offsetx, count = 8) {
+        const coins = [];
+        for (let i = 0; i < count; i++) {
+            const x = Math.floor(Math.random() * 1200) + 100; 
+            const y = Math.floor(Math.random() * 175) + 150; 
+            coins.push(new Coin(x, y, offsetx));
         }
+        return coins;
     }
-    //#endregion
 }
+
+// #endregion

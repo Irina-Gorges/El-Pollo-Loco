@@ -1,0 +1,30 @@
+{
+    "source": {
+        "include": [
+            "models/background-object.class.js",
+            "models/character.class.js",
+            "models/Chicken.class.js",
+            "models/cloud.class.js",
+            "models/coin-bar.class.js",
+            "models/coin.class.js",
+            "models/consumable-object.class.js",
+            "models/drawableObject.class.js",
+            "models/endboss-bar.class.js",
+            "models/endboss.class.js",
+            "models/hp-bar.class.js",
+            "models/Hub.class.js",
+            "models/keyboard.class.js",
+            "models/level.class.js",
+            "models/moveable-object.class.js",
+            "models/salsa-bar.class.js",
+            "models/salsa-bottle.class.js",
+            "models/status-bar.class.js",
+            "models/throwable-salsa.class.js",
+            "models/world.class.js"
+        ],
+        "exclude": ["../node_modules"]
+    },
+    "opts": {
+        "destination": "assetts/fonts/docs"
+    }
+}

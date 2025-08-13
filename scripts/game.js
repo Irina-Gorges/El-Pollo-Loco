@@ -1,211 +1,305 @@
-/**
- * @fileoverview Initializes the game canvas, handles keyboard input and audio playback.
- */
+// #region Global Variables
+
+/** @type {HTMLCanvasElement} */
 let canvas;
+
+/** @type {World} */
 let world;
+
+/** @type {Keyboard} */
 let keyboard = new Keyboard();
-let isShowing = false;
 
-const startScreen = document.getElementById('startScreen');
-const winScreen = document.getElementById('winScreen');
-const gameOverScreen = document.getElementById('gameOverScreen');
+// Audio-Einstellungen beim Laden initialisieren
+AudioHub.loadAudioSettings();
+
+// #endregion
+
+// #region Initialization
 
 /**
- * Initializes the canvas and game world, and gets the drawing context.
- * Called when the game starts.
+ * Initialisiert das Spiel, indem das Canvas-Element abgefragt und
+ * eine neue Welt mit Tastatursteuerung erstellt wird.
  */
-function init() {
-    canvas = document.getElementById('canvas');
-    world = new World(canvas, keyboard);
-    ctx = canvas.getContext('2d');
-    showStartScreen();
-    hideWinScreen();
-    hideGameOverScreen();
-}
-
 function startGame() {
-    hideStartScreen();
+    canvas = document.querySelector(`#canvas`);
     world = new World(canvas, keyboard);
-    AudioHub.playSound(AudioHub.backgroundMusic.AUDIO_BACKGROUND);
+    document.querySelector(".start-area").classList.add("d_none");
+    document.querySelector(".rules").classList.add("d_none");
+    document.querySelector(".impressum-button").classList.add("d_none");
+    AudioHub.startBackgroundMusic();
 }
 
-function restartGame() {
-    initLevel();
+function startAgain() {
+    Intervalhub.stopAllintervals();
+    canvas = document.querySelector(`#canvas`);
     world = new World(canvas, keyboard);
-    hideWinScreen();
-    hideGameOverScreen();
+    document.querySelector(".loose-screen").classList.add("d_none");
+    document.querySelector(".win-screen").classList.add("d_none");   
+    document.querySelector(".impressum-button").classList.add("d_none");
+    AudioHub.startBackgroundMusic();
 }
 
-function hideStartScreen() {
-    startScreen.classList.add('hide');
-    startScreen.classList.remove('show');
-    startScreen.style.zIndex = -10;
+function endGame() {
+    Intervalhub.stopAllintervals();
+    document.querySelector(".loose-screen").classList.add("d_none");
+    document.querySelector(".win-screen").classList.add("d_none");
+    document.querySelector(".start-area").classList.remove("d_none");
+    document.querySelector(".rules").classList.remove("d_none");
+    document.querySelector(".impressum-button").classList.remove("d_none");
+    AudioHub.stopAllSounds();
 }
 
-function hideWinScreen() {
-    winScreen.classList.add('hide');
-    winScreen.classList.remove('show');
-    winScreen.style.zIndex = -15;
-}
+// #endregion
 
-function showStartScreen() {
-    startScreen.classList.remove('hide');
-    startScreen.classList.add('show');
-    startScreen.style.zIndex = 10;
-}
-
-function showGameOverScreen() {
-    gameOverScreen.classList.add('show');
-    gameOverScreen.classList.remove('hide');
-    gameOverScreen.style.zIndex = 15;
-    IntervalHub.stopAllIntervals();
-    AudioHub.playSound(AudioHub.gameSounds.AUDIO_GAMELOST);
-}
+// #region Event Listeners: Keyboard Input
 
 /**
- * Hides the lose screen.
+ * Hört auf Tastendruck und setzt die entsprechenden Flags im Keyboard-Objekt.
  */
-function hideGameOverScreen() {
-    gameOverScreen.classList.add('hide');
-    gameOverScreen.classList.remove('show');
-    gameOverScreen.style.zIndex = -15;
-}
-
-/**
- * Background music audio element.
- * @type {HTMLAudioElement}
- */
-const bgMusic = new Audio(AudioHub.backgroundMusic.AUDIO_BACKGROUND[0]);
-bgMusic.loop = true;
-bgMusic.volume = 0.15; // Standardlautstärke auf 15%
-
-AudioHub.applySettingsTo(bgMusic); // Lautstärke & Mute anwenden
-bgMusic.play();
-
-// Optional global speichern, z. B.:
-window.bgMusic = bgMusic;
-
-window.addEventListener('DOMContentLoaded', () => {
-    const slider = document.getElementById('volumeSlider');
-    const muteBtn = document.getElementById('muteBtn');
-
-    const audioSettings = AudioHub.getSettings();
-    slider.value = audioSettings.volume ?? 0.15; // Fallback auf 0.15 falls nicht gesetzt
-    updateMuteButton(audioSettings.muted);
-
-    // Volume ändern
-    slider.addEventListener('input', (e) => {
-        const newVolume = parseFloat(e.target.value);
-        AudioHub.setVolume(newVolume);
-        // Alle Sounds auf neue Lautstärke setzen
-        if (AudioHub.setVolumeForAll) {
-            AudioHub.setVolumeForAll(newVolume);
-        }
-        if (window.bgMusic) {
-            window.bgMusic.volume = newVolume;
-        }
-    });
-
-    // Mute umschalten
-    muteBtn.addEventListener('click', () => {
-        AudioHub.toggleMute();
-        const newMuted = AudioHub.getSettings().muted;
-        updateMuteButton(newMuted);
-        if (window.bgMusic) {
-            window.bgMusic.muted = newMuted;
-        }
-    });
-
-
-    AudioHub.playSound = function(src) {
-    const audio = new Audio(src);
-    audio.volume = 0.15; // Standardlautstärke
-    audio.play();
-};
-    /**
-     * Updates the mute button icon based on mute state.
-     * @param {boolean} muted - Whether audio is muted.
-     */
-    function updateMuteButton(muted) {
-        const btn = document.getElementById('muteBtn');
-        btn.textContent = muted ? '🔊' : '🔇';
-        btn.style.opacity = 0.7;
-        setTimeout(() => (btn.style.opacity = 1), 100);
-    }
-});
-
-/**
- * Keyboard key down event listener for controlling the character.
- * Sets the corresponding key state in the keyboard object.
- * @param {KeyboardEvent} event
- */
-window.addEventListener('keydown', (event) => {
-    if (event.code == 'KeyD') {
+window.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowRight" || event.key === "d" || event.key === "D") {
         keyboard.RIGHT = true;
     }
-
-    if (event.code == 'KeyA') {
+    if (event.key === "ArrowLeft" || event.key === "a" || event.key === "A") {
         keyboard.LEFT = true;
     }
-
-    if (event.code == 'KeyW') {
+    if (event.key === "ArrowUp" || event.key === "w" || event.key === "W") {
         keyboard.UP = true;
     }
-
-    if (event.code == 'KeyS') {
+    if (event.key === "ArrowDown" || event.key === "s" || event.key === "S") {
         keyboard.DOWN = true;
     }
-
-    if (event.code == 'Space') {
-        keyboard.SPACE = true;
+    if (event.key === " ") {
+        keyboard.SPACEBAR = true;
     }
-
-    if (event.code == 'KeyF') {
-        keyboard.THROW = true;
+    if (event.key === "f" || event.key === "F") {
+        keyboard.C = true;
     }
-    console.log(event);
 });
 
 /**
- * Keyboard key up event listener for controlling the character.
- * Resets the corresponding key state in the keyboard object.
- * @param {KeyboardEvent} event
+ * Hört auf das Loslassen von Tasten und entfernt die entsprechenden Flags.
  */
-window.addEventListener('keyup', (event) => {
-    if (event.code == 'KeyD') {
+window.addEventListener("keyup", (event) => {
+    if (event.key === "ArrowRight" || event.key === "d" || event.key === "D") {
         keyboard.RIGHT = false;
     }
-
-    if (event.code == 'KeyA') {
+    if (event.key === "ArrowLeft" || event.key === "a" || event.key === "A") {
         keyboard.LEFT = false;
     }
-
-    if (event.code == 'KeyW') {
+    if (event.key === "ArrowUp" || event.key === "w" || event.key === "W") {
         keyboard.UP = false;
     }
-
-    if (event.code == 'KeyS') {
+    if (event.key === "ArrowDown" || event.key === "s" || event.key === "S") {
         keyboard.DOWN = false;
     }
-
-    if (event.code == 'Space') {
-        keyboard.SPACE = false;
+    if (event.key === " ") {
+        keyboard.SPACEBAR = false;
     }
-
-    if (event.code == 'KeyF') {
-        keyboard.THROW = false;
+    if (event.key === "f" || event.key === "F") {
+        keyboard.C = false;
+        if (world) {
+            world.sperre = true;
+        }
     }
-    console.log(event);
 });
 
-// Beispiel für audioHub.js
-AudioHub.setVolumeForAll = function(volume) {
-    // Alle Audio-Objekte durchgehen und Lautstärke setzen
-    const allAudios = [
-        window.bgMusic,
-        // weitere Audio-Objekte hier ergänzen, z.B. window.gameLostSound, etc.
-    ];
-    allAudios.forEach(audio => {
-        if (audio) audio.volume = volume;
+// #endregion
+
+// #region Mobile Touch Controls
+
+/**
+ * Initialisiert die Touch-Controls für mobile Geräte
+ */
+function initMobileControls() {
+    const leftBtn = document.getElementById('leftBtn');
+    const rightBtn = document.getElementById('rightBtn');
+    const jumpBtn = document.getElementById('jumpBtn');
+    const throwBtn = document.getElementById('throwBtn');
+
+    // Links-Button
+    leftBtn.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.LEFT = true;
     });
-};
+    leftBtn.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.LEFT = false;
+    });
+
+    // Rechts-Button
+    rightBtn.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.RIGHT = true;
+    });
+    rightBtn.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.RIGHT = false;
+    });
+
+    // Sprung-Button
+    jumpBtn.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.SPACEBAR = true;
+    });
+    jumpBtn.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.SPACEBAR = false;
+    });
+
+    // Wurf-Button
+    throwBtn.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.F = true;
+    });
+    throwBtn.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.F = false;
+        if (world) {
+            world.sperre = true;
+        }
+    });
+
+    // Zusätzlich auch Mouse-Events für Desktop-Testing
+    [leftBtn, rightBtn, jumpBtn, throwBtn].forEach(btn => {
+        btn.addEventListener('mousedown', (e) => {
+            e.preventDefault();
+            const btnId = e.target.id;
+            switch(btnId) {
+                case 'leftBtn': keyboard.LEFT = true; break;
+                case 'rightBtn': keyboard.RIGHT = true; break;
+                case 'jumpBtn': keyboard.SPACEBAR = true; break;
+                case 'throwBtn': keyboard.F = true; break;
+            }
+        });
+        
+        btn.addEventListener('mouseup', (e) => {
+            e.preventDefault();
+            const btnId = e.target.id;
+            switch(btnId) {
+                case 'leftBtn': keyboard.LEFT = false; break;
+                case 'rightBtn': keyboard.RIGHT = false; break;
+                case 'jumpBtn': keyboard.SPACEBAR = false; break;
+                case 'throwBtn': 
+                    keyboard.F = false; 
+                    if (world) world.sperre = true;
+                    break;
+            }
+        });
+    });
+}
+
+// Touch-Controls nach DOM-Load initialisieren
+document.addEventListener('DOMContentLoaded', () => {
+    initMobileControls();
+    initAudioUI();
+});
+
+// #endregion
+
+// #region Audio Controls
+
+/**
+ * Initialisiert die Audio-UI
+ */
+function initAudioUI() {
+    setupInitialUI();
+    setupSlider();
+    setupToggle();
+}
+
+/**
+ * Setzt die initiale UI basierend auf AudioHub-Status
+ */
+function setupInitialUI() {
+    const volumeSlider = document.getElementById('volumeSlider');
+    const audioIcon = document.getElementById('audioIcon');
+    const audioToggle = document.getElementById('audioToggle');
+
+    if (volumeSlider) {
+        volumeSlider.value = AudioHub.isMuted ? 0 : AudioHub.currentVolume;
+    }
+    if (audioIcon) {
+        audioIcon.textContent = AudioHub.isMuted ? '🔇' : '🔊';
+    }
+    if (audioToggle) {
+        audioToggle.classList.toggle('muted', AudioHub.isMuted);
+    }
+}
+
+/**
+ * Konfiguriert den Desktop Volume Slider
+ */
+function setupSlider() {
+    const volumeSlider = document.getElementById('volumeSlider');
+    const audioIcon = document.getElementById('audioIcon');
+    const audioToggle = document.getElementById('audioToggle');
+    if (volumeSlider) {
+        volumeSlider.addEventListener('input', (e) => {
+            const volume = parseInt(e.target.value);
+            AudioHub.setVolume(volume);
+            
+            if (volume == 0) {
+                AudioHub.setMuted(true);
+                if (audioIcon) audioIcon.textContent = '🔇';
+                if (audioToggle) audioToggle.classList.add('muted');
+            } else {
+                AudioHub.setMuted(false);
+                if (audioIcon) audioIcon.textContent = '🔊';
+                if (audioToggle) audioToggle.classList.remove('muted');
+            }
+        });
+    }
+}
+
+/**
+ * Konfiguriert den Mobile Audio Toggle
+ */
+function setupToggle() {
+    const volumeSlider = document.getElementById('volumeSlider');
+    const audioIcon = document.getElementById('audioIcon');
+    const audioToggle = document.getElementById('audioToggle');
+
+    if (audioToggle) {
+        audioToggle.addEventListener('click', () => {
+            const newMutedState = !AudioHub.isMuted;
+            AudioHub.setMuted(newMutedState);
+            
+            if (newMutedState) {
+                if (audioIcon) audioIcon.textContent = '🔇';
+                audioToggle.classList.add('muted');
+                if (volumeSlider) volumeSlider.value = 0;
+            } else {
+                if (audioIcon) audioIcon.textContent = '🔊';
+                audioToggle.classList.remove('muted');
+                if (volumeSlider) volumeSlider.value = AudioHub.currentVolume;
+            }
+        });
+    }
+}
+
+// Global verfügbar machen für Kompatibilität
+window.stopAllSounds = () => AudioHub.stopAllSounds();
+
+// #endregion
+
+// #region Impressum
+
+/**
+ * Öffnet das Impressum Overlay
+ */
+function openImpressum() {
+    const overlay = document.getElementById('impressumOverlay');
+    overlay.classList.remove('d_none');
+    overlay.classList.add('d_flex');
+}
+
+/**
+ * Schließt das Impressum Overlay
+ */
+function closeImpressum() {
+    const overlay = document.getElementById('impressumOverlay');
+    overlay.classList.remove('d_flex');
+    overlay.classList.add('d_none');
+}
+// #endregion

@@ -5,99 +5,124 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>El Pollo Loco</title>
-    <link rel="stylesheet" href="styles/style.css" />
-    <link rel="shortcut icon" href="./img/favicon.webp" type="image/x-icon" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="img/favicon.webp" type="image/x-icon" />
 </head>
 
-<body onload="init()">
+<body>
+    <!-- Rotate Overlay Mobile -->
+    <div class="rotate-overlay d_none">
+        <div class="rotate-icon"><img src="img/rotate_phone (1).gif" alt=""></div>
+    </div>
+
+    <div class="title">
+        <h1>El Pollo Loco</h1>
+    </div>
     <main>
-        <div>
-            <h1>El Pollo Loco</h1>
+        <!-- Audio Controls -->
+        <div class="audio-controls">
+            <!-- Desktop Volume Slider -->
+            <div class="volume-control desktop-only">
+                <input type="range" id="volumeSlider" min="0" max="100" value="50" class="volume-slider">
+                <span class="volume-label">🔊</span>
+            </div>
+
+            <!-- Mobile Mute/Loud Toggle -->
+            <button class="audio-toggle mobile-only" id="audioToggle">
+                <span id="audioIcon">🔊</span>
+            </button>
         </div>
-        <div id="main_Content">
-            <div id="rotateScreen">
-                <img src="./img/rotate_phone (1).gif" alt="">
-            </div>
 
-            <div class="start-Screen screens d_none" id="startScreen">
-                <button class="StartBtn" id="startButton" onclick="startGame(), initLevel()">
-                    START
-                </button>
+        <!-- Mobile Controls -->
+        <div class="mobile-controls ">
+            <div class="controls-left">
+                <button class="control-btn control-left" id="leftBtn">
+                    <img src="img/10_mobile_ui/arrow_left.png" alt=""> </button>
+                        <button class="control-btn control-right" id="rightBtn"><img src="img/10_mobile_ui/arrow_right.png" alt=""></button>
             </div>
+            <div class="controls-right">
+                <button class="control-btn control-jump" id="jumpBtn"><img src="img/10_mobile_ui/arrow_up.png" alt=""></button>
+                <button class="control-btn control-throw" id="throwBtn"><img src="img/10_mobile_ui/throw.png" alt=""></button>
+            </div>
+        </div>
 
-            <div id="audio-controls">
-                <label for="volumeSlider"></label>
-                <input type="range" id="volumeSlider" min="0" max="1" step="0.01" />
-                <button id="muteBtn" title="Ton stummschalten / aktivieren">
-                    🔇
-                </button>
-            </div>
-
-            <div id="winScreen">
-                <img src="img/You won, you lost/You Win A.png" alt="win screen">
-                <div class="flex">
-                    <button class="btn-style" onclick="showStartFromWin()">HOME</button>
-                    <button class="btn-style" onclick="restartGame()">RESTART</button>
-                </div>
-            </div>
-
-            <div id="gameOverScreen">
-                <img src="img/You won, you lost/Game Over.png" alt="gameOver screen">
-                <div class="flex">
-                    <button class="btn-style" onclick="showStartFromLoose()">HOME</button>
-                    <button class="btn-style" onclick="restartGame()">RESTART</button>
-                </div>
-            </div>
-
-            <div id="mobileUI">
-                <div id="mobile-movement" class="img-position">
-                    <button id="mo-ui-left" class="btn-style img-position">
-                        <img src="./img/mobile_ui/arrow_left.png" alt="left">
-                    </button>
-                    <button id="mo-ui-right" class="btn-style img-position">
-                        <img src="./img/mobile_ui/arrow_right.png" alt="right">
-                    </button>
-                </div>
-                <div id="mobile-action" class="img-position">
-                    <button id="mo-ui-throw" class="btn-style img-position">
-                        <img src="./img/mobile_ui/throw.png" alt="throw">
-                    </button>
-                    <button id="mo-ui-jump" class="btn-style img-position">
-                        <img src="./img/mobile_ui/arrow_up.png" alt="jump">
-                    </button>
-                </div>
-            </div>
+        <div class="canvas-wrapper">
             <canvas id="canvas" width="720" height="480"></canvas>
-            <div id="info">
-                <div class="rules_Settings">
-                    <p>How to Play</p>
-                    <span>Left: A &nbsp;&nbsp; Right: D &nbsp;&nbsp; Jump:
-                        Space &nbsp;&nbsp; Throw: F
-                    </span>
-                </div>
+        </div>
+
+        <div class="rules">
+            <div class="rules_Settings">
+                <p>How to Play</p>
+                <span>Left: A &nbsp;&nbsp; Right: D &nbsp;&nbsp; Jump:
+                    Space &nbsp;&nbsp; Throw: F
+                </span>
             </div>
+        </div>
+
+        <div class="start-area">
+            <img src="img/9_intro_outro_screens/start/startscreen_1.png" alt="" />
+            <button class="startbutton" onclick="startGame()">Start</button>
+        </div>
+
+        <div class="loose-screen d_none">
+            <img class="yLost" src="img/You won, you lost/You lost b.png" alt="" />
+            <img class="background" src="img/5_background/first_half_background.png" alt="" />
+            <button class="restart-button" onclick="startAgain()">Restart</button>
+            <button class="end-button" onclick="endGame()">Ende</button>
+        </div>
+
+        <div class="win-screen d_none">
+            <img class="yWin" src="img/You won, you lost/You Win A.png" alt="" />
+            <img class="background" src="img/5_background/first_half_background.png" alt="" />
+            <button class="restart-button" onclick="startAgain()">Restart</button>
+            <button class="end-button-w" onclick="endGame()">Ende</button>
+        </div>
     </main>
 
-    <script src="models/drawable-object.class.js"></script>
-    <script src="models/movable-object.class.js"></script>
+    <div id="impressumOverlay" class="overlay d_none">
+        <div class="overlay-content">
+            <div class="overlay-header">
+                <h2>Impressum</h2>
+                <button class="close-button" onclick="closeImpressum()">&times;</button>
+            </div>
+            <div class="overlay-body">
+                <h1>Impressum</h1>
+
+                <p>Irina Gorges<br />
+                    Bachstr. 37<br />
+                    37574 Einbeck</p>
+
+                <h2>Kontakt</h2>
+                <p>Telefon: 01706564231<br />
+                    E-Mail: IrinaGorges@live.de</p>
+
+                <p>Quelle: <a href="https://www.e-recht24.de">https://www.e-recht24.de</a></p>
+            </div>
+        </div>
+    </div>
+    <button class="impressum-button" onclick="openImpressum()">Impressum</button>
+    <script src="models/Hub.class.js"></script>
+    <script src="models/drawableObject.class.js"></script>
+    <script src="models/moveable-object.class.js"></script>
+    <script src="models/consumable-object.class.js"></script>
     <script src="models/character.class.js"></script>
-    <script src="models/chicken.class.js"></script>
-    <script src="models/small-chicken.class.js"></script>
+    <script src="models/Chicken.class.js"></script>
     <script src="models/cloud.class.js"></script>
-    <script src="models/statusbar.class.js"></script>
-    <script src="models/coinsbar.class.js"></script>
-    <script src="models/bottlebar.class.js"></script>
-    <script src="models/endbossBar.class.js"></script>
-    <script src="models/coin.class.js"></script>
-    <script src="models/salsabottles.class.js"></script>
-    <script src="models/world.class.js"></script>
+    <script src="models/status-bar.class.js"></script>
+    <script src="models/hp-bar.class.js"></script>
+    <script src="models/coin-bar.class.js"></script>
+    <script src="models/salsa-bar.class.js"></script>
+    <script src="models/endboss-bar.class.js"></script>
+    <script src="models/throwable-salsa.class.js"></script>
     <script src="models/background-object.class.js"></script>
+    <script src="models/salsa-bottle.class.js"></script>
+    <script src="models/coin.class.js"></script>
     <script src="models/keyboard.class.js"></script>
     <script src="models/level.class.js"></script>
-    <script src="models/throwable-object.class.js"></script>
     <script src="models/endboss.class.js"></script>
-    <script src="models/hubs.js"></script>
+    <script src="models/world.class.js"></script>
     <script src="scripts/game.js"></script>
+    <script src="scripts/script.js"></script>
 </body>
 
 </html>
