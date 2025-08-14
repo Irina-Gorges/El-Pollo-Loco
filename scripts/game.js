@@ -73,7 +73,7 @@ window.addEventListener("keydown", (event) => {
         keyboard.SPACEBAR = true;
     }
     if (event.key === "f" || event.key === "F") {
-        keyboard.C = true;
+        keyboard.F = true;
     }
 });
 
@@ -97,7 +97,7 @@ window.addEventListener("keyup", (event) => {
         keyboard.SPACEBAR = false;
     }
     if (event.key === "f" || event.key === "F") {
-        keyboard.C = false;
+        keyboard.F = false;
         if (world) {
             world.sperre = true;
         }
@@ -150,10 +150,12 @@ function initMobileControls() {
     // Wurf-Button
     throwBtn.addEventListener('touchstart', (e) => {
         e.preventDefault();
+        console.log('throwBtn touchstart'); // <--- Testausgabe
         keyboard.F = true;
     });
     throwBtn.addEventListener('touchend', (e) => {
         e.preventDefault();
+        console.log('throwBtn touchend'); // <--- Testausgabe
         keyboard.F = false;
         if (world) {
             world.sperre = true;
@@ -164,7 +166,7 @@ function initMobileControls() {
     [leftBtn, rightBtn, jumpBtn, throwBtn].forEach(btn => {
         btn.addEventListener('mousedown', (e) => {
             e.preventDefault();
-            const btnId = e.target.id;
+            const btnId = btn.id;
             switch(btnId) {
                 case 'leftBtn': keyboard.LEFT = true; break;
                 case 'rightBtn': keyboard.RIGHT = true; break;
@@ -175,7 +177,7 @@ function initMobileControls() {
         
         btn.addEventListener('mouseup', (e) => {
             e.preventDefault();
-            const btnId = e.target.id;
+            const btnId = btn.id;
             switch(btnId) {
                 case 'leftBtn': keyboard.LEFT = false; break;
                 case 'rightBtn': keyboard.RIGHT = false; break;

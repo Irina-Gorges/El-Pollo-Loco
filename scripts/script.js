@@ -15,7 +15,7 @@ class ResponsiveCanvas {
 
     setup() {
         this.rotateOverlay = document.querySelector('.rotate-overlay');
-        this.keybinds = document.querySelector('.Keybinds');
+        this.keybinds = document.querySelector('.rules');
         
         // Event Listeners
         window.addEventListener('resize', () => this.checkOrientation());

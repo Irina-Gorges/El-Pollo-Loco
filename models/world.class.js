@@ -174,7 +174,7 @@ class World {
     }
 
     checkThrowableObjects() {
-        if (this.keyboard.C && this.sperre && this.salsa_bar.percentage !== 0) {
+        if (this.keyboard.F && this.sperre && this.salsa_bar.percentage !== 0) {
             this.sperre = false;
             this.generateNewThrowableSalsa();
         }

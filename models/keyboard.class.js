@@ -13,7 +13,7 @@ class Keyboard {
     UP = false;
     DOWN = false;
     SPACEBAR = false;
-    C = false;
+    F = false;
 
     // #endregion
 }
