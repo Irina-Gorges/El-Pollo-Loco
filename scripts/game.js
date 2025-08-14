@@ -57,6 +57,14 @@ function endGame() {
  * Hört auf Tastendruck und setzt die entsprechenden Flags im Keyboard-Objekt.
  */
 window.addEventListener("keydown", (event) => {
+    if (
+        event.key === "ArrowRight" ||
+        event.key === "ArrowLeft" ||
+        event.key === "ArrowUp" ||
+        event.key === "ArrowDown"
+    ) {
+        event.preventDefault(); // <-- verhindert das Bewegen des Sliders!
+    }
     if (event.key === "ArrowRight" || event.key === "d" || event.key === "D") {
         keyboard.RIGHT = true;
     }
@@ -81,6 +89,14 @@ window.addEventListener("keydown", (event) => {
  * Hört auf das Loslassen von Tasten und entfernt die entsprechenden Flags.
  */
 window.addEventListener("keyup", (event) => {
+    if (
+        event.key === "ArrowRight" ||
+        event.key === "ArrowLeft" ||
+        event.key === "ArrowUp" ||
+        event.key === "ArrowDown"
+    ) {
+        event.preventDefault(); // <-- verhindert das Bewegen des Sliders!
+    }
     if (event.key === "ArrowRight" || event.key === "d" || event.key === "D") {
         keyboard.RIGHT = false;
     }
